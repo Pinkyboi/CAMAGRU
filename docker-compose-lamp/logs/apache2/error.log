@@ -27,3 +27,6 @@ AH00558: apache2: Could not reliably determine the server's fully qualified doma
 [Sat Jul 13 22:23:39.970363 2019] [mpm_prefork:notice] [pid 1] AH00163: Apache/2.4.25 (Debian) PHP/7.1.20 configured -- resuming normal operations
 [Sat Jul 13 22:23:39.978231 2019] [core:notice] [pid 1] AH00094: Command line: 'apache2 -D FOREGROUND'
 [Sat Jul 13 22:49:26.535877 2019] [mpm_prefork:notice] [pid 1] AH00169: caught SIGTERM, shutting down
+AH00558: apache2: Could not reliably determine the server's fully qualified domain name, using 172.19.0.3. Set the 'ServerName' directive globally to suppress this message
+[Sun Jul 14 01:13:39.235884 2019] [mpm_prefork:notice] [pid 1] AH00163: Apache/2.4.25 (Debian) PHP/7.1.20 configured -- resuming normal operations
+[Sun Jul 14 01:13:39.237334 2019] [core:notice] [pid 1] AH00094: Command line: 'apache2 -D FOREGROUND'

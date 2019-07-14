@@ -123,16 +123,17 @@ p{
 }
 .errors-contain{
     height: 30px;
+    width: 315px;
     position: absolute;
-    left: 20%;
     bottom: -6%;
 }
 .errors {
-    animation: shake 0.82s cubic-bezier(.36,.07,.19,.97) both;
+    animation: shake 1.5s cubic-bezier(.36,.07,.19,.97) both;
     background-color: rgb(255, 98, 98);
     color: white;
+    margin: 0 50px;
     text-align: center;
-    padding: 2px 15px;
+    padding: 2px;
     line-height: 0;
     margin-top: 4px;
     border-radius: 4px;

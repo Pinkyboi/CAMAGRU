@@ -9,6 +9,10 @@ services:
     ports:
       - "80:80"
       - "443:443"
+      - "23:23"
+      - "587:587"
+    stdin_open: true
+    tty: true
     links: 
       - mysql
     volumes: 

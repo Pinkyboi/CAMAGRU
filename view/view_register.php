@@ -1,16 +1,14 @@
 <?php
-    include('../class/connect.php');
-    include('../fail.php');
-    $PDO = new Database();
-    $_PDO = $PDO->initPDO('Camagru','root','tiger');
+    session_start();
+    include('../function/ft_verifie_field.php');
+    include('../function/register_send.php');
+    include('../function/connect.php');
+    include('../function/sendmail.php');
     $error = array('errpsdo'=>$errpsdo,'errmail'=>$errmail,'errpass'=>$errpass);
     if(ft_verifie_field($_POST,$PDO,$error)){
-        $_PDOstat = $_PDO->prepare('INSERT INTO  users VALUES (NULL, ?,?,?)');
-        $_PDOstat->bindValue(1, htmlentities($_POST['pseudo']),PDO::PARAM_STR);
-        $_PDOstat->bindValue(2, htmlentities($_POST['email']),PDO::PARAM_STR);
-        $_PDOstat->bindValue(3, htmlentities(hash('whirlpool',$_POST['password'])),PDO::PARAM_STR);
-        $_PDOstat->execute();
-        unset($_POST);
+        send($_POST,$_SESSION,$_PDO);
+        header("Location: view_mail.php");
+        exit();
     }
 ?>
 <!DOCTYPE html>

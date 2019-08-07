@@ -1,31 +1,17 @@
 <?php
-    session_start();
     include('../function/connect.php');
     include('../function/sendmail.php');
-    if($_POST['submit']){
-            $number = $_POST;
-        unset($number['submit']);
-        foreach($number as $nb){
-            if(strlen($nb) != 1)
-                $error = "wrong number of parameters";
-        }
-        $nb = implode($number);
-        if(strlen($nb) != 4){
-            $error = "wrong number of parameters";
-        }
-        if(!$error){
-            if($_SESSION['token'] == $nb){
-                $statement = "UPDATE $db_name SET `token` = ? WHERE email = "."'".$_SESSION['email']."'";
-                if($PDO->verifyPDO($db_name,"token",$nb)){
-                    $token = array('0');
-                    $PDO->statementPDO($db_name,$statement,$token,0);
-                }
-                else
-                    $error = "wrong code";            
-            }
-        }
+    session_start();
+    if(!$_SESSION['token'] || !$_SESSION['pseudo']){
+        header('Location: view_login.php');
+        die();
     }
-?>
+    if(($_GET['pseudo'] == $_SESSION['pseudo'])&&($_GET['resend'] == $_SESSION['resend'])){
+        $mail->password_mail($_SESSION['email'],$_SESSION['user'],$_SEESION['token']);
+        $valid = "the mail has been resent";
+        $_SESSION['resend'] = md5(rand(1,9999)); 
+    }
+?> 
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -34,32 +20,31 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>CAMAGRU</title>
     <link rel="stylesheet" type="text/css" media="screen" href="../style/mail.css" />
+    <script src="../js/animation.js"></script>
 </head>
 <body>
-    <div class="container">
+    <div class="navbar">
+        <div class="LOGO">
+            <a href="#"><img src="../imgs/log-logo.svg" alt=""></a>
+        </div>
+    </div>
+    <div class="reveal container ">
         <div class="field">
             <div class="logo"><img src="../imgs/mail.png" alt=""></div>
             <div class="translate">
                 <h1 class="title">Verification link sent!</h1><br>
-                <p>Your acount hs been sccessfully registred to complete the precess please enter the 4 digit code sent to <br><span id="email"><?php echo $_SESSION['email']?></span></p><br>
-                <form action="view_mail.php" method="POST">
-                    <input class='<?php if($error) echo "error"?>'type="text" name = "num1" maxlength="1" required>
-                    <input class='<?php if($error) echo "error"?>'type="text" name = "num2" maxlength="1" required>
-                    <input class='<?php if($error) echo "error"?>'type="text" name = "num3" maxlength="1" required>
-                    <input class='<?php if($error) echo "error"?>'type="text" name = "num4" maxlength="1" required><br>
-                    <input type="submit" name = "submit" value="send">
-                </form>
+                <p>Your acount hs been sccessfully registred to complete the precess enter the link sent to your email<br><span id="email"><?php echo $_SESSION['email']?></span></p><br>
             </div>
         </div> 
-        <div class="resend">
-            <p class="question"> if you didn't get any email ?<a href="view_main.php" class="send"> Resend confirmation email</a></p>
-                    <div class="errors-contain">
-            <?php if($error)echo "<div class='errors'>$error</div>";?>
-        </div>
-        </div>
-
+            <div class="resend">
+                <p class="question"> if you didn't get any email ?<a class ="send" href="./view_mail.php?<?php if($_SESSION['pseudo'])echo 'pseudo='.$_SESSION['pseudo']?><?php if($_SESSION['resend'])echo '&resend='.$_SESSION['resend']?>"> Resend confirmation email</a></p>
+            </div>
+            <?php
+                if($valid)
+                    echo "<div style='position: relative;top: 60px;'class='valide'>$valid</div>";
+            ?>
     </div>
-
+    <footer class="footer">© 2019 CAMAGRU</footer>
 </body>
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
 </html>  

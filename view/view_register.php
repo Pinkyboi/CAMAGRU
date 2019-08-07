@@ -1,14 +1,15 @@
 <?php
     session_start();
-    include('../function/ft_verifie_field.php');
+    include('../function/verifie_registration.php');
     include('../function/register_send.php');
     include('../function/connect.php');
     include('../function/sendmail.php');
     $error = array('errpsdo'=>$errpsdo,'errmail'=>$errmail,'errpass'=>$errpass);
     if(ft_verifie_field($_POST,$PDO,$error)){
         send($_POST,$_SESSION,$_PDO);
+        $mail->verification_mail($_SESSION['email'],$_SESSION['pseudo'],$_SEESION['token']);
         header("Location: view_mail.php");
-        exit();
+        die();
     }
 ?>
 <!DOCTYPE html>
@@ -22,6 +23,14 @@
 
 </head>
 <body>
+    <div class="navbar">
+        <div class="LOGO">
+            <a href="view_login.php"><img src="../imgs/log-logo.svg" alt=""></a>
+        </div>
+    </div>
+    <div class="gallery">
+        <p class="question">Not sure yet ?<a href="./view_password.php" class="action"> discover our gallery now</a></p>
+    </div>
     <div class="container">
             <div class="sidebar reveal2"></div>
                 <div class="register">
@@ -42,13 +51,14 @@
                 <div class="errors-contain">
                     <?php
                         foreach($error as $err){
-                            if($err != NULL)
+                            if($err)
                                 echo "<div class='errors'><p>$err</p></div>";
                         }
                     ?>
                 </div>
             </div>
     </div>
+    <footer class="footer">© 2019 CAMAGRU</footer>
         <script src="../js/animation.js"></script>
         <script>
             var password = document.querySelector('.password');

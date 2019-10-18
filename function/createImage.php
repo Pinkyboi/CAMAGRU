@@ -40,14 +40,31 @@
                     $resourceCanva = imagecreatefromstring($decodeCava);
                     $width = imagesx($resourceCanva);
                     $height = imagesy($resourceCanva);
-                    var_dump($POST);
+                    if($POST['posY'] && $POST['posX']){
+                        $posY = floatval($POST['posY']);
+                        $posX = floatval($POST['posX']);                        
+                    }
+                    else{
+                        $posY = 0;
+                        $posX = 0;                         
+                    }
+
+
                     if(floor($width * 0.75) === floor($height)){
                         $cleanCanva = imagecreatetruecolor($destWidth,$destHeight);
                         imagecopyresampled($cleanCanva, $resourceCanva, 0, 0, 0, 0, $destWidth, $destHeight, $width, $height);
                         $sticker = imagecreatefrompng($sticker);
                         $stickerW = $destWidth * 0.3;
-                        $stickerY = $destWidth * 0.4;
-                        imagecopy($cleanCanva, $sticker, 0, $destHeight - 270, 0, 0,$stickerW,$stickerY);
+                        $stickerY = $destHeight * 0.4;
+                        // if(!$POST['posX'])
+                        //     $POST['posX'] = 0;
+                        // if(!$POST['posY'])
+                        //     $POST['posY'] = 0;
+                        $offsetX = $POST['posX'] * ($destWidth - $stickerW)/3;
+                        $offsetY = $destHeight - $POST['posY']*($destHeight - $stickerY)/3 - $stickerY;
+                        var_dump($offsetY);
+                        // var_dump($offsetX);
+                        imagecopy($cleanCanva, $sticker, $offsetX , $offsetY, 0, 0,$stickerW,$stickerY);
                         $file = $folderPath . uniqid() . '.png';
                         imagepng($cleanCanva, $file);
                         addNewPost($file,$PDO,$SESSION); 
@@ -58,3 +75,7 @@
         catch(Exeption $e){}
     }
 ?>
+                        <!-- $offsetY = $destHeight - (270 - (($destHeight-270)*$posY));
+                        $offsetX = 0 + (($destWidth - 270)*$posX);
+                        echo $offsetY;
+                        echo $offsetX; -->

@@ -184,8 +184,8 @@
                                         sticker.style.bottom = posY + 'px';  
                                         sticker2.style.bottom = posY + 'px';  
                                 }
-                                inputY.value = (canvaHeight - stickerHeight)/posY;
-                                inputX.value = (canvaWidth - stickerWidth)/posX;
+                                inputY.value = (posY/(canvaHeight - stickerHeight))/(1/3);
+                                inputX.value = (posX/(canvaWidth - stickerWidth))/(1/3);
                         });
                                             
                 })();

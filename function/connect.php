@@ -1,10 +1,9 @@
 <?php
-    include('../class/connect-class.php');
-    include('../class/mail-class.php');
-    $PDO = new Database();
-    $_PDO = $PDO->initPDO('Camagru','root','tiger');
+    include_once('autoloader.php');
+    include('../config/database.php');
+    $PDO = new Database($DB_DNS,$DB_USER,$DB_PASSWORD);
+    $_PDO = $PDO->_PDO;
     $_PDO->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     $_PDO->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
-    $db_name = 'users';
     $mail = new Mail();
 ?>

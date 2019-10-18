@@ -3,6 +3,6 @@
     unset($_SESSION);
     session_destroy();
     session_write_close();
-    header('Location: ../view/view_login.php');
+    echo './viewIndex.php';
     die;
 ?>

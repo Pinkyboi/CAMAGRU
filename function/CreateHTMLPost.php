@@ -40,8 +40,11 @@
                         $postUser .= "<img onclick='deletePublication(this)'class='delete-icon' src='../imgs/delete-icon.png' alt='delete-icon'>";
                         $yourPost = $postID;                
                 }
-                else
-                        $yourPost = 0;                                                        
+                else{
+                        $postUser .= "<img onclick='blockUser(this)'class='delete-icon' src='../imgs/more.png' alt='delete-icon'>";
+                        $yourPost = 0;    
+                }
+                                                                                
                 $postUser .="</div></div></div></div>";
                 echo $postUser;
                 return($yourPost);     
@@ -108,6 +111,7 @@
                 if($haveFriends)
                         echo '<hr>';
         }
+
         function postBottom($SESSION){
                 if($SESSION){
                         $bottom  = "<div class='fieldSection'><div class='row'><div class='no-padding col-sm-12'>";
@@ -125,6 +129,7 @@
                 echo $bottom;
 
         }
+
         function youCanDelete(){
                 $youDelete .= "<div class='delConfirmation'><div class='row'>
                 <div class='confirmation'>";
@@ -136,7 +141,21 @@
                 $youDelete .= "<div class='choice delete' onclick='deletePostQuery(this)'>Delete</div><div class='choice cancel'>Cancel</div>";
                 $youDelete .= "</div></div></div></div></div>";
                 echo $youDelete;
-        }        
+        }
+
+        function youCanBlock(){
+                $youDelete .= "<div class='delConfirmation'><div class='row'>
+                <div class='confirmation confirmation1'>";
+                $youDelete .= "<div class='no-padding col-sm-12'>";
+                
+                $youDelete .="<p>you are going to block this user, are you sure ?</p>";
+                $youDelete .= "<div class='choices'>";
+                $youDelete .= "<span style='display:none'></span>";
+                $youDelete .= "<div class='choice delete delete1' onclick='blockQuery(this)'>Block</div><div class='choice cancel cancel1'>Cancel</div>";
+                $youDelete .= "</div></div></div></div></div>";
+                echo $youDelete;
+        }
+
         function youCanEdit($SESSION,$PDO,$link='../views/viewGallery.php'){
                 $statement = "SELECT `notification` FROM users WHERE pseudo = ?";
                 $field = array($_SESSION['pseudo']);
@@ -209,8 +228,11 @@
                 echo "</div>";
         }
     if($_GET['use'] === 'reload'){
+        $statement = "SELECT ID FROM users WHERE pseudo = ?";
+        $field = array($_SESSION['pseudo']);
+        $userID = $PDO->statementPDO($statement,$field);
         $index = $_GET['index'];
-        $gallery = new Gallery($PDO,$index);
+        $gallery = new Gallery($PDO,$index,2,$userID[0]);
         $datas = $gallery->connectData;
         foreach ($datas as $data){
                 viewSinglePost($data,$gallery,$_SESSION);

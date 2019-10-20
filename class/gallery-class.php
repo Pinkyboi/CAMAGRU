@@ -1,9 +1,12 @@
 <?php
 class Gallery{
     public $data;
-    public function __construct($PDO,$index,$number=2){
+    public function __construct($PDO,$index,$number=2,$userID=0){
         if($number == 2){
-            $statement = "SELECT * FROM `images` LIMIT $number OFFSET ?";
+            if($userID)
+                $statement = "SELECT * FROM images WHERE USER NOT IN (SELECT blocked_id FROM block WHERE blocker_id = $userID) LIMIT $number OFFSET ?";
+            else
+                $statement = "SELECT * FROM `images` LIMIT $number OFFSET ?";
             $_PDOverif = $PDO->_PDO->prepare($statement);
             $offset = array($index);
             $_PDOverif->execute($offset);            

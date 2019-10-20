@@ -66,8 +66,30 @@ function hidePic(e) {
     takePic.style.display = "block";
     containUpload.style.display = "block";
 }
-
+function infiniteloading(e){
+    dead = false
+    let scrollSave = e;
+    let scrollable = document.documentElement.scrollHeight - window.innerHeight;
+    let scrolled = window.scrollY;
+    if(Math.ceil(scrolled) === scrollable){
+            if(dead == false){
+                    dead = true;
+                    index = document.querySelectorAll('.post').length;
+                    let spinner = document.querySelector('.spinner');
+                    spinner.style.display ='block';
+                    let statement = "../function/CreateHTMLPost.php?use=reload&index="+index;  
+                    setTimeout(function(){resendQuery(statement,2);}, 2000);
+                    setTimeout(function(){spinner.style.display ='none'}, 3000);
+                    setTimeout(function(){dead = false}, 4000); 
+                    if(scrollable > scrollSave){
+                            index = document.querySelectorAll('.post').length;
+                            scrollSave = scrollable;   
+                    }
+            }
+    } 
+}
 function deletePublication(e) {
+    let scrollSave = 0;
     let focus = document.querySelector('.focus');
     let choice = document.querySelector('.confirmation');
     let canceled = document.querySelector('.cancel');
@@ -85,10 +107,28 @@ function deletePublication(e) {
         if(actual.parentNode){
             actual.parentNode.removeChild(actual);
             focus.style.display = "none";
-            choice.style.display = "none";            
+            choice.style.display = "none";
+            infiniteloading(scrollSave);           
         }
-
     })
+}
+function blockUser(e) {
+    let scrollSave = 0;
+    var objDiv = document.querySelector(".parent");
+    let focus = document.querySelector('.focus');
+    let choice = document.querySelector('.confirmation1');
+    let canceled = document.querySelector('.cancel1');
+    var deleted = document.querySelector('.delete1');
+    var deleted_icon = e;
+    let actual = deleted_icon.parentNode.parentNode.parentNode.parentNode.parentNode;
+    focus.style.display = "block";
+    choice.style.display = "block";
+    choice.firstChild.children[1].firstChild.innerHTML = actual.firstChild.innerHTML;
+    canceled.addEventListener("click", function (e) {
+        focus.style.display = "none";
+        choice.style.display = "none";
+    });
+    objDiv.scrollTop = objDiv.scrollHeight;
 }
 
 function addComment(e,comment) {
@@ -274,9 +314,15 @@ function addCommentQuery(e){
             resendQuery(statement);
             addComment(e,comment1);   
         }
-        
     }
 });
+}
+
+function blockQuery(e){
+    let postID = e.parentNode.firstChild.innerHTML;
+    let statement = "../function/postInteraction.php?use=block&postID="+postID;
+    resendQuery(statement);
+    location.reload(true);
 }
 
 function deletePostQuery(e){

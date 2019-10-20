@@ -16,13 +16,15 @@
         echo "<div class='bounce2'></div>";
         echo "<div class='bounce3'></div></div>";
         echo "<div class='focus'></div>";
+        youCanBlock();
         echo "<footer class='footer' style='position:fixed !important'>© 2019 CAMAGRU</footer>";
 ?>
         
 </body>
 
         <script>
-                (function(){
+                
+                (function(e){
                         let scrollSave = 0;
                         let index = 0;
                         let dead = false;
@@ -32,6 +34,8 @@
                         if(!postVerif[0]){
                                 resendQuery(statement,2);
                         }
+                        // if(index = document.querySelectorAll('.post').length === 0)
+                        //         infiniteloading(e)
                         window.addEventListener('scroll',function(){
                                 let scrollable = document.documentElement.scrollHeight - window.innerHeight;
                                 let scrolled = window.scrollY;

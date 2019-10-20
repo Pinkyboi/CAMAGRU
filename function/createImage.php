@@ -56,14 +56,12 @@
                         $sticker = imagecreatefrompng($sticker);
                         $stickerW = $destWidth * 0.3;
                         $stickerY = $destHeight * 0.4;
-                        // if(!$POST['posX'])
-                        //     $POST['posX'] = 0;
-                        // if(!$POST['posY'])
-                        //     $POST['posY'] = 0;
                         $offsetX = $POST['posX'] * ($destWidth - $stickerW)/3;
                         $offsetY = $destHeight - $POST['posY']*($destHeight - $stickerY)/3 - $stickerY;
-                        var_dump($offsetY);
-                        // var_dump($offsetX);
+                        if($POST['posX'] > 3|| $POST['posX'] < 0)
+                            $offsetX = 0;
+                        if($POST['posY'] > 3|| $POST['posY'] < 0)
+                            $offsetY = $destHeight - $stickerY;
                         imagecopy($cleanCanva, $sticker, $offsetX , $offsetY, 0, 0,$stickerW,$stickerY);
                         $file = $folderPath . uniqid() . '.png';
                         imagepng($cleanCanva, $file);
@@ -75,7 +73,3 @@
         catch(Exeption $e){}
     }
 ?>
-                        <!-- $offsetY = $destHeight - (270 - (($destHeight-270)*$posY));
-                        $offsetX = 0 + (($destWidth - 270)*$posX);
-                        echo $offsetY;
-                        echo $offsetX; -->

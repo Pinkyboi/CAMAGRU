@@ -165,3 +165,66 @@ function hideThePic(ev) {
         containUpload.style.display = "none";
 }
 
+(
+        function moveSticker(){
+        document.addEventListener("keydown", function (event) {
+
+                let sticker = document.querySelector('.sticker');
+                let sticker2 = document.querySelector('.sticker2');
+                let takePic = document.querySelector('#video');
+                let thePic = document.querySelector('.thePic');
+                let inputY = document.querySelector('.posY');
+                let inputX = document.querySelector('.posX');
+                let stickerWidth = parseInt(window.getComputedStyle(sticker).width, 10);
+                let stickerHeight = parseInt(window.getComputedStyle(sticker).height, 10);
+                let canvaWidth = parseInt(window.getComputedStyle(takePic).width, 10);
+                let canvaHeight = parseInt(window.getComputedStyle(takePic).height, 10);
+                posX = (parseInt(sticker.style.left) || 0);
+                if(canvaWidth && canvaHeight){
+                        if(event.keyCode == 37){
+                                if(posX - Math.floor((canvaWidth - stickerWidth)/3) >= 0){
+                                        posX -= Math.floor((canvaWidth - stickerWidth)/3);
+                                }
+                                else{
+                                        posX = 0;    
+                                }
+                                sticker.style.left = posX + 'px';
+                                sticker2.style.left = posX + 'px';
+                        }
+                        if(event.keyCode == 39){
+                                if(Math.floor((canvaWidth - stickerWidth)/3) + posX  <= Math.floor(canvaWidth - stickerWidth)){
+                                        posX += Math.floor((canvaWidth - stickerWidth)/3);
+                                }
+                                sticker.style.left = posX + 'px';
+                                sticker2.style.left = posX + 'px';
+                        }
+                        posY = (parseInt(sticker.style.bottom) || 0);
+                        if(event.keyCode == 38){
+                                if(Math.floor((canvaHeight - stickerHeight)/3) + posY  <= Math.floor(canvaHeight - stickerHeight)){
+                                        posY += Math.floor((canvaHeight - stickerHeight)/3);
+                                }
+                                sticker.style.bottom = posY + 'px';
+                                sticker2.style.bottom = posY + 'px';
+                        }
+                        if(event.keyCode == 40){
+                                if(posY - Math.floor((canvaHeight - stickerWidth))/3  > 0){
+                                        posY -= Math.floor((canvaHeight - stickerHeight))/3;
+                                }
+                                else{
+                                        posY = 0;    
+                                }
+                                sticker.style.bottom = posY + 'px';  
+                                sticker2.style.bottom = posY + 'px';  
+                        }
+                        inputY.value = (posY == 6)?((posY-6)/(canvaHeight - stickerHeight))/(1/3) : (posY/(canvaHeight - stickerHeight))/(1/3);
+                        inputX.value = (posX/(canvaWidth - stickerWidth))/(1/3);                        
+                }
+        });           
+})();
+function adaptSticker(){
+        let sticker = document.querySelector('.sticker');
+        // let stickerWidth = parseInt(window.getComputedStyle(sticker).width, 10);
+        // let stickerHeight = parseInt(window.getComputedStyle(sticker).height, 10);
+        sticker.style.bottom = 6 + 'px'; 
+        sticker.style.left = 0 + 'px'; 
+}; 

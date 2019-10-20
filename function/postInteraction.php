@@ -87,6 +87,20 @@
         }
         catch(Exeption $e){}
     }
+    if($_GET['use'] == 'block' && $_GET['postID']){
+        try{
+            $statement = "SELECT ID FROM users WHERE pseudo = ?";
+            $field = array($_SESSION['pseudo']);
+            $userID = $PDO->statementPDO($statement,$field);
+            $statement2   = "SELECT `USER` FROM images WHERE ID = ?";
+            $field = array($_GET['postID']);
+            $blockedID = $PDO->statementPDO($statement2,$field);
+            $statement = "INSERT INTO `block` VALUES (NULL,?,?)";
+            $field = array($userID[0],$blockedID[0]);
+            $PDO->statementPDO($statement,$field,0);
+        }
+        catch(Exeption $e){}
+    }
     if($_GET['use'] == 'commentDel' && $_GET['commentID']){
         try{
             $commentID = $_GET['commentID'];

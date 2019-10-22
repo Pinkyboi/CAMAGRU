@@ -1,25 +1,23 @@
-<?php
-        session_start();
+<?php        
         include('../function/connect.php');
         include('../function/CreateHTMLPost.php');
         include('../function/imageUpload.php');
         include('../function/createImage.php');
+        include('../function/exitSession.php');
+        headCreate();
         try{
-                if(!$_SESSION['profile']){
+                if(!isset($_SESSION['profile'])){
                         header('Location: ./viewIndex.php');
-                        die ;    
+                        die;    
                 }
-                else if($_POST['submitButton'])
+                else if(isset($_POST['submitButton']))
                         verifyNewPost($_SESSION,$_POST,$PDO);
                 $time = $_SESSION['time'] = time();                
         }
         catch(Exeption $e){}
-?>
-<?php
-        headCreate();
         echo "<body onresize='adaptSticker()' onkeypress='moveSticker()'>";
         navbar($_SESSION);
-        if($_SESSION['pseudo'])
+        if(isset($_SESSION['pseudo']))
                 youCanEdit($_SESSION,$PDO,$_SERVER['PHP_SELF']); 
 ?>
         <div class="cam container">
@@ -39,8 +37,7 @@
                                                                         <div class="rightArrow"></div>
                                                                 </div>
                                                                 <div class="choices">
-                                                                        <button   id="startButton">Prendre une
-                                                                                photo</button>
+                                                                        <button   id="startButton">Take a picture</button>
                                                                         <button onclick="hideThePic()"id="saveButton">Save</button>
                                                                 </div>
                                                         </div>
@@ -117,11 +114,11 @@
                                                         $fields = array($_SESSION['pseudo']);
                                                         $time =1;
                                                         $index = $PDO->statementPDO($statement,$fields);
-                                                        $gallery = new Gallery($PDO,$index['ID'],3);
+                                                        $gallery = new Gallery($PDO,$index['ID'],4);
                                                         $datas = $gallery->connectData;
                                                         foreach ($datas as $data)
                                                                 allMiniPost($data,$gallery,$_SESSION,0,$time);
-                                                        youCanDelete($yourPost);                                                   
+                                                        youCanDelete();                                                   
                                                 }
                                                 catch(Exeption $e){}
                                         ?>

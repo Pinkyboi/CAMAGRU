@@ -48,6 +48,7 @@ hr {
     border-radius: 5px;
     margin: 20px;
     padding: 0 15px;
+    box-shadow: 0 0 0.2rem rgba(0, 0, 0, 0.5);
 }
 
 .connectYourself {
@@ -204,7 +205,7 @@ hr {
 .field input[type='email'],
 .field input[type='password'] {
     width: 85%;
-    padding: 9px 0 1px 10px;
+    padding: 9px 10px;
     border: #191919 solid 2px;
     border-radius: 5px;
     background-color: #191919;
@@ -265,7 +266,7 @@ hr {
     text-align: center;
     border-radius: 5px;
     background-color: #202020;
-    box-shadow: 0 0 0.2rem rgba(0, 0, 0, 0.2);
+    box-shadow: 0 0 0.2rem rgba(0, 0, 0, 0.5);
 }
 
 #card .field {
@@ -340,6 +341,7 @@ hr {
 }
 
 .navbar {
+    box-shadow: 0 0 0.2rem rgba(0, 0, 0, 0.2);
     background-color: #070707;
 }
 
@@ -754,6 +756,7 @@ form .sticker-input {
 
 .loginForm a:hover {
     text-decoration: underline;
+    color: rgb(129, 127, 128);
 }
 
 .switch span,
@@ -882,11 +885,18 @@ input[type='submit']:focus {
 
 .changeCard .changeForm {
     position: absolute;
-    padding-top: 30px;
+    padding-top: 10px;
     left: 50%;
     transform: translateX(-50%);
 }
-
+.removeText{
+    color:#D32F2F;
+    font-size: 10px; 
+}
+.removeUser:hover{
+    text-decoration: underline;
+    text-decoration-color: #D32F2F;
+}
 #profileUpload {
     display: none;
 }
@@ -984,7 +994,7 @@ input:checked+.slider:before {
 @media screen and (max-width: 520px) {
     .main .post {
         border-radius: 0px;
-        margin: 20px 0;
+        margin: 0;
     }
 
     .main {
@@ -1017,7 +1027,7 @@ input:checked+.slider:before {
     }
 
     #card .resend .question,
-        {
+    {
         border-radius: 0 !important;
         width: 100%;
     }
@@ -1050,7 +1060,6 @@ input:checked+.slider:before {
     .preview{
         overflow: hidden;
         max-width: 100%;
-        /* overflow-x: hidden; */
         background-color: #1a1919 !important;
     }
     .hider {
@@ -1058,7 +1067,12 @@ input:checked+.slider:before {
     }
 
     .loginCard {
+        position: relative;
+        left: 0;
+        top: 0;
+        padding-top: 10px;
         width: 100%;
+        transform: none;
     }
 }
 

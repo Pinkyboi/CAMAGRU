@@ -1,11 +1,11 @@
 <?php
     function    ft_verifie_password($password,&$confirmPassword){
-        $regexPassword = "/(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}/";
+        $regexPassword = "/(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&\#])[A-Za-z\d@$!%*?&\#]{8,}/";
         if(!preg_match($regexPassword, $password)){
             unset($confirmPassword);  
-            return "Your password should be at least 8 characters long contain digits, (lower/upper)case leters and special caracters (@$!%*?&).";          
+            return "Your password should be at least 8 characters long contain digits, (lower/upper)case leters and special caracters (@$!%*?&#).";          
         }
-        if($password != $confirmPassword){
+        else if($password != $confirmPassword){
             unset($confirmPassword);
             return "wrong password confirmation.";
         }
@@ -23,12 +23,18 @@
     }
 
     function    ft_verifie_pseudo($user,$PDO){
-        if($PDO->verifyPDO('users','pseudo',$user)){
-            return "this pseudo is already taken.";
+        $regexPseudo = "/^[A-Za-z0-9\.\_\-]{0,}$/";
+        if(!preg_match($regexPseudo, $user)){
+            return "digits leters and (._-) are the only characters alowed for a username";
+        }  
+        else if($PDO->verifyPDO('users','pseudo',$user)){
+            return "this username is already taken.";
         }
-        if(strlen($user) > 15){
-            return "the pseudo lenght is too big.";
+        else if(strlen($user) > 15){
+            return "the username lenght is too big.";
         }
+        else if(strlen($user) < 4)
+            return "the username must contain at least 4 characters.";
         return NULL;       
     }
 

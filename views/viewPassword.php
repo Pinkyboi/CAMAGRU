@@ -1,9 +1,11 @@
 <?php
     include("../function/connect.php");
     include('../function/CreateHTMLPost.php');
+    include('../function/exitSession.php');   
     headCreate();
     echo '<body>';
-    navbar($_SESSION);
+    navbar();
+
 ?>
     <div class="container mail">
         <div id="card">

@@ -18,7 +18,7 @@
         return $notif[0];
     }
 
-    if($_GET['use'] == 'delete' && $_GET['postID'] && $_SESSION['pseudo']){
+    if($_GET['use'] == 'delete' && isset($_GET['postID']) && isset($_SESSION['pseudo'])){
         $statement   = "SELECT `USER` FROM images WHERE ID = ?";
         $field = array($_GET['postID']);
         $userID = $PDO->statementPDO($statement,$field);
@@ -44,7 +44,7 @@
         }
     }
 
-    if($_GET['use'] == 'like' && $_GET['postID'] && $_SESSION['pseudo']){
+    if($_GET['use'] == 'like' && isset($_GET['postID']) && isset($_SESSION['pseudo'])){
         try{
             $statement = "SELECT ID FROM users WHERE pseudo = ?";
             $field = array($_SESSION['pseudo']);
@@ -65,13 +65,14 @@
                 $PDO->statementPDO($statement1, $field1);
                 if(getNotified($PDO)){
                     getInfoOwner($email, $pseudo, $PDO);
-                    $mail->likeMail($pseudo[0],$_SESSION['pseudo'],$email[0],$_GET['postID']);
+                    $liker = ($_SESSION['pseudo'] === $pseudo[0]) ? "yourself" : $_SESSION['pseudo'] ;
+                    $mail->likeMail($pseudo[0],$liker,$email[0],$_GET['postID']);
                 }
             }            
         }
         catch(Exeption $e){}
     }
-    if($_GET['use'] == 'comment' && $_GET['postID'] && $_SESSION['pseudo'] && $_GET['comment']){
+    if($_GET['use'] == 'comment' && isset($_GET['postID']) && isset($_SESSION['pseudo']) && isset($_GET['comment'])){
         try{
             $comment = $_GET['comment'];
             $statement = "SELECT ID FROM users WHERE pseudo = ?";
@@ -82,12 +83,13 @@
             $PDO->statementPDO($statement,$field);
             if(getNotified($PDO)){
                 getInfoOwner($email, $pseudo, $PDO);
-                $mail->commentMail($pseudo[0],$_SESSION['pseudo'],$email[0],$_GET['postID']);
+                $commenter = ($_SESSION['pseudo'] === $pseudo[0]) ? "yourself" : $_SESSION['pseudo'] ;
+                $mail->commentMail($pseudo[0],$commenter,$email[0],$_GET['postID']);
             }            
         }
         catch(Exeption $e){}
     }
-    if($_GET['use'] == 'block' && $_GET['postID']){
+    if($_GET['use'] == 'block' && isset($_GET['postID'])){
         try{
             $statement = "SELECT ID FROM users WHERE pseudo = ?";
             $field = array($_SESSION['pseudo']);
@@ -101,7 +103,7 @@
         }
         catch(Exeption $e){}
     }
-    if($_GET['use'] == 'commentDel' && $_GET['commentID']){
+    if($_GET['use'] == 'commentDel' && isset($_GET['commentID'])){
         try{
             $commentID = $_GET['commentID'];
             $statement = "DELETE FROM comment WHERE comment_id = ?";

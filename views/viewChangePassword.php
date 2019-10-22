@@ -1,4 +1,4 @@
-<?
+<?php
     include('../function/connect.php');
     include('../function/verifieRegistration.php');
     include('../function/CreateHTMLPost.php');
@@ -17,8 +17,7 @@
     catch(Exeption $e){}
     headCreate();
     echo '<body>';
-    session_start();
-    navbar($_SESSION); 
+    navbar(); 
 ?>
 <script>
     
@@ -31,7 +30,7 @@
                         <div class="confirm-message">
                             <div style='margin-right: 25px;' class="logo"><img src="../imgs/lock.png" alt=""></div>
                             <h1 class="title">Change your password</h1><br>
-                            <p>Welcome back! in the fields bellow enter your new password and confirm it.<br><span style='font-weight:600'><?php echo $_SESSION['email']?></span></p><br>
+                            <p>Welcome back! in the fields bellow enter your new password and confirm it.<br><span style='font-weight:600'><?php if(isset($_SESSION['email']))echo $_SESSION['email']?></span></p><br>
                         </div>
                         <form onsubmit = "passwordResend(event)">
                             <input type="hidden" id='token' value = "<?php echo $token?>">

@@ -1,5 +1,5 @@
 <?php
-    $HOST = "10.12.1.4:3306";
+    $HOST = "localhost";
     $DB_DNS = "mysql:host=$HOST;dbname=Camagru";
     $DB_USER = 'root';
-    $DB_PASSWORD = 'tiger';
+    $DB_PASSWORD = 'root';

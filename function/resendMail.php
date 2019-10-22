@@ -20,25 +20,19 @@
         $PDO->statementPDO($statement,$field,0);
         return($token);
     }
-    if($_GET['ID'] && getToken($_GET['ID'],$PDO)){
+
+    if(isset($_GET['use']) && isset($_GET['ID']) && getToken($_GET['ID'],$PDO)){
         try{
             $userID = $_GET['ID'];
             $statement= 'SELECT pseudo FROM users WHERE ID = ?';
             $user = $PDO->statementPDO($statement, array($userID));
             $email = getEmail($userID,$PDO);
             $token = changeToken($userID,$PDO);
-            if($mail->verificationMail($email, $user[0], $_GET['ID'], $token))
-                echo 'email';
             $valid = "the mail has been resent";
-            if($_GET['use']){
+            if(isset($_GET['use'])){
                 $mail->verificationMail($email, $user[0], $_GET['ID'], $token);
                 echo $valid;
-            }
-                  
+            }      
         }
         catch(Exeption $e){}
-    }
-    else{
-        header('Location: ../views/viewIndex.php');
-        die();
     }

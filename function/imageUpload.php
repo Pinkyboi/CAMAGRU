@@ -1,8 +1,6 @@
 <?php
     include('connect.php');
 
-    session_start();
-
     function profilePic($SESSION,$PDO){
         $statement = "SELECT `profile` FROM users WHERE pseudo =?";
         $field = array($SESSION['pseudo']);
@@ -18,9 +16,11 @@
         $fileTmpName = $file['tmp_name'];
         $fileType = $file['type'];
         if($fileTmpName)
-            $fileInfo = getimagesize($fileTmpName);
+            $fileInfo = @getimagesize($fileTmpName);
         $allowedExtension = array("png","jpg","jpeg");
-        $fileExtension = strtolower(end(explode('.',$fileName)));
+        $trimedPath = explode('.',$fileName);
+        $extention = end($trimedPath);
+        $fileExtension = strtolower($extention);
         if ($FILE['profile'] && !in_array($fileExtension, $allowedExtension)) {
             return NULL;
         }
@@ -30,7 +30,7 @@
         elseif($fileError){
             return NULL;
         }
-        else if ($FILE['profile'] && (!isset($fileInfo[0]) || !isset($fileInfo[1]))) {
+        else if ($FILE['profile'] &&  (!isset($fileInfo[0]) || !isset($fileInfo[1]))) {
             return NULL;
         } 
         

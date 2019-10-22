@@ -1,8 +1,8 @@
 <?php
-        session_start();
         include('../function/connect.php');
         include('../function/CreateHTMLPost.php');
-        include('../function/imageUpload.php');             
+        include('../function/imageUpload.php');
+        include('../function/exitSession.php');    
         headCreate();
         echo '<body>';
         navbar($_SESSION);
@@ -34,8 +34,6 @@
                         if(!postVerif[0]){
                                 resendQuery(statement,2);
                         }
-                        // if(index = document.querySelectorAll('.post').length === 0)
-                        //         infiniteloading(e)
                         window.addEventListener('scroll',function(){
                                 let scrollable = document.documentElement.scrollHeight - window.innerHeight;
                                 let scrolled = window.scrollY;

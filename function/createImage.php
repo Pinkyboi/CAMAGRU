@@ -29,8 +29,8 @@
                 $folderPath = "../gallery/";
                 $filtredCanva = str_replace('data:image/png;base64,', '',$rawCanvas);
                 if(empty($filtredCanva)){
-                        header('Location: ./viewCamera.php');
-                        die;
+                    header('Location: ./viewCamera.php');
+                    die;
                 }
                 $encodedCanva = str_replace(' ', '+',$filtredCanva);
                 $decodeCava = base64_decode($filtredCanva, TRUE);
@@ -40,24 +40,20 @@
                     $resourceCanva = imagecreatefromstring($decodeCava);
                     $width = imagesx($resourceCanva);
                     $height = imagesy($resourceCanva);
-                    if($POST['posY'] && $POST['posX']){
-                        $posY = floatval($POST['posY']);
-                        $posX = floatval($POST['posX']);                        
+                    if(!(isset($POST['posY']) && isset($POST['posX']))){
+                        $POST['posY'] = 0;
+                        $POST['posX'] = 0;                        
                     }
-                    else{
-                        $posY = 0;
-                        $posX = 0;                         
-                    }
-
-
+                    $postY = floatval($POST['posY']);
+                    $postX = floatval($POST['posX']);  
                     if(floor($width * 0.75) === floor($height)){
                         $cleanCanva = imagecreatetruecolor($destWidth,$destHeight);
                         imagecopyresampled($cleanCanva, $resourceCanva, 0, 0, 0, 0, $destWidth, $destHeight, $width, $height);
                         $sticker = imagecreatefrompng($sticker);
                         $stickerW = $destWidth * 0.3;
                         $stickerY = $destHeight * 0.4;
-                        $offsetX = $POST['posX'] * ($destWidth - $stickerW)/3;
-                        $offsetY = $destHeight - $POST['posY']*($destHeight - $stickerY)/3 - $stickerY;
+                        $offsetX = $postX * ($destWidth - $stickerW)/3;
+                        $offsetY = $destHeight - $postY *($destHeight - $stickerY)/3 - $stickerY;
                         if($POST['posX'] > 3|| $POST['posX'] < 0)
                             $offsetX = 0;
                         if($POST['posY'] > 3|| $POST['posY'] < 0)

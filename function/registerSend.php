@@ -6,7 +6,7 @@
                 $SESSION['token'] = $token;
                 $password = hash('whirlpool',$_POST['passwordRegistration']);
                 $statement = "INSERT INTO  users VALUES (NULL, ?,?,?,?,'../gallery/profile.png','1')";
-                $fields = array(htmlentities($_POST['userRegistration']),htmlentities($_POST['emailRegistration']),$password,$token);
+                $fields = array(htmlentities($_POST['userRegistration']),htmlentities($_POST['emailRegistration']),$password,$SESSION['token']);
                 $PDO->statementPDO($statement, $fields,0);            
             }
             if($use === 1)

@@ -1,4 +1,4 @@
-<?
+<?php
     include('connect.php');
     function sendEmailPassword($PDO,$mail){
         $messageSend = array();
@@ -12,20 +12,24 @@
                         $statement = 'INSERT INTO password_reset VALUES (NULL,?,?)';
                         $PDO->statementPDO($statement,$field,0);
                         $valid = "the email has been sent";
+                        $error = '';
                     }
                     else{
                         $statement = "UPDATE password_reset SET token = ? WHERE email = ?";
                         $PDO->statementPDO($statement,$field,0);
+                        $statement = "SELECT ID FROM users WHERE email = ?";
+                        $id = $PDO->statementPDO($statement,array($_GET['email']));
+                        $statement = "SELECT pseudo FROM users WHERE email = ?";
+                        $pseudo = $PDO->statementPDO($statement,array($_GET['email']));
+                        $mail->passwordMail($pseudo[0],$id[0],$token,$_GET['email']);
                         $valid = "the email has been resent";
+                        $error = '';
                     }
-                    $statement = "SELECT ID FROM users WHERE email = ?";
-                    $id = $PDO->statementPDO($statement,array($_GET['email']));
-                    $statement = "SELECT pseudo FROM users WHERE email = ?";
-                    $pseudo = $PDO->statementPDO($statement,array($_GET['email']));
-                    $mail->passwordMail($pseudo[0],$id[0],$token,$_GET['email']);
                 }
-                else
-                $error = "There's no account with is email";                   
+                else{
+                    $error = "There's no account with is email";
+                    $valid = '';
+                }         
             }
             catch(Exeption $e){}
         }

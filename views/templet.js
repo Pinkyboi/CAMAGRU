@@ -29,19 +29,27 @@ const resendQuery = (function(statement,use=0){
                     parent.appendChild(childs);
                     unwrap(document.querySelector('.removableDiv'));
             }
-            if(use === 3)
-                window.location.href = this.responseText;
-            if(use === 4){
-                let content = document.querySelector('.errorContainer');
-                jsonMessage = JSON.parse(this.responseText);
-                if(jsonMessage['valid'])
-                    content.innerHTML = "<div class='error valide'>"+jsonMessage['valid']+"</div>";
-                else
-                    content.innerHTML = "<div class='error'>"+jsonMessage['error']+"</div>";
-                content.children[0].style.opacity = 1;
-                setTimeout(function(){ content.children[0].style.opacity = 0; }, 5000)
+            if(use === 3){
+                console.log(this.responseText);
+                window.location.replace(this.responseText);
             }
+            if(use === 4){
+                if(!this.responseText)
+                    window.location.replace("./viewIndex.php");
+                else{
+                    let content = document.querySelector('.errorContainer');
+                    jsonMessage = JSON.parse(this.responseText);
+                    if(jsonMessage['valid'])
+                        content.innerHTML = "<div class='error valide'>"+jsonMessage['valid']+"</div>";
+                    else
+                        content.innerHTML = "<div class='error'>"+jsonMessage['error']+"</div>";
+                    content.children[0].style.opacity = 1;
+                    setTimeout(function(){ content.children[0].style.opacity = 0; }, 5000);
+                }
+            }
+            
         }
+        
     }
     newXML.send();   
 });
@@ -265,7 +273,7 @@ function copyLink(e){
     let input = document.querySelector('.copyField');
     let copiedLink = e.nextSibling;
     input.style.display = 'block';
-    input.value = "views/viewSinglePost.php?id=" + idPost;
+    input.value = "http://10.12.1.4:80"+"/views/viewSinglePost.php?id=" + idPost;
     input.select();
     document.execCommand("Copy");
     input.setSelectionRange(0, 99999);
@@ -336,6 +344,11 @@ function likesQuery(e){
     let postID = e.parentNode.parentNode.parentNode.firstChild.innerHTML;
     let statement = "../function/postInteraction.php?use=like&postID="+postID;
     resendQuery(statement);
+}
+
+function delUserQuery(e){
+    let statement = "../function/deleteUser.php?use=delTheUser";
+    resendQuery(statement,3);
 }
 
 function submitChanges(e){

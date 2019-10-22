@@ -1,9 +1,11 @@
 <?php
     include('../function/connect.php');
     include('../function/CreateHTMLPost.php');
-    
-    session_start();
-    if(!$_GET['token'] || !$_GET['ID']){
+    include('../function/exitSession.php');
+    headCreate();
+    echo '<body>';
+    navbar();
+    if(!isset($_GET['token']) || !isset($_GET['ID'])){
         header('Location: ./viewIndex.php');
         die ;
     }
@@ -20,12 +22,8 @@
                 die();  
             }
         }
-        catch(Exeption $e){
-        }
+        catch(Exeption $e){}
     }
-    headCreate();
-    echo '<body>';
-    navbar($_SESSION);
 ?>
     <div class="container mail">
         <div id="card">

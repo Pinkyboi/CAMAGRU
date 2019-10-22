@@ -1,5 +1,6 @@
 <?php
     include('../function/CreateHTMLPost.php');
+    include('../function/exitSession.php');
     headCreate();
     navbar($_SESSION);
     echo "<div class='container main'>";
@@ -7,18 +8,35 @@
     echo "<input class='copyField' style='opacity:0'type='text'>";
     echo'<body>';
     try{
-        if($_FILES['profile']['name']){
+        if(isset($_FILES['profile']['name'])){
                 uploadImage($_FILES,$_SESSION,$PDO,'profile');
                 $_SESSION['profile'] = profilePic($_SESSION,$PDO);
         }              
-        if($_GET['id'])
+        if(isset($_GET['id']))
         {
                 $index = $_GET['id'];
-                $gallery = new Gallery($PDO,$index,1);
+                if(isset($_SESSION['pseudo'])){
+                        $statement = "SELECT ID FROM users WHERE pseudo = ?";
+                        $field = array($_SESSION['pseudo']);
+                        $userID = $PDO->statementPDO($statement,$field);
+                        $index = $_GET['id'];
+                        $gallery = new Gallery($PDO,$index,3,$userID[0]);
+                }
+                else
+                        $gallery = new Gallery($PDO,$index,1);
                 $datas = $gallery->connectData;
-                viewSinglePost($datas[0],$gallery,$_SESSION,1);
-                if($_SESSION['pseudo'])
-                        youCanEdit($_SESSION,$PDO,"{$_SERVER['PHP_SELF']}?id={$_GET['id']}");            
+                if(!empty($datas)){
+                        viewSinglePost($datas[0],$gallery,$_SESSION,1);
+                        if(isset($_SESSION['pseudo']))
+                                youCanEdit($_SESSION,$PDO,"{$_SERVER['PHP_SELF']}?id={$_GET['id']}"); 
+                        youCanDelete();
+                        youCanBlock();                         
+                }
+                else{
+                   header('Location: ./viewGallery.php');
+                   die ;
+                }
+                
         }
     }
     catch(Exeption $e){}

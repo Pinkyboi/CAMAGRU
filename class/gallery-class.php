@@ -4,9 +4,9 @@ class Gallery{
     public function __construct($PDO,$index,$number=2,$userID=0){
         if($number == 2){
             if($userID)
-                $statement = "SELECT * FROM images WHERE USER NOT IN (SELECT blocked_id FROM block WHERE blocker_id = $userID) LIMIT $number OFFSET ?";
+                $statement = "SELECT * FROM images WHERE USER NOT IN (SELECT blocked_id FROM block WHERE blocker_id = $userID) LIMIT 5 OFFSET ?";
             else
-                $statement = "SELECT * FROM `images` LIMIT $number OFFSET ?";
+                $statement = "SELECT * FROM `images` LIMIT 5 OFFSET ?";
             $_PDOverif = $PDO->_PDO->prepare($statement);
             $offset = array($index);
             $_PDOverif->execute($offset);            
@@ -18,6 +18,12 @@ class Gallery{
             $_PDOverif->execute($offset);   
         }
         else if($number == 3){
+            $statement = "SELECT * FROM `images` WHERE USER NOT IN (SELECT blocked_id FROM block WHERE blocker_id = $userID)AND ID = ?";
+            $_PDOverif = $PDO->_PDO->prepare($statement);
+            $offset = array($index);
+            $_PDOverif->execute($offset);    
+        }
+        else if($number == 4){
             $statement = "SELECT * FROM `images` WHERE USER = ?";
             $_PDOverif = $PDO->_PDO->prepare($statement);
             $offset = array($index);
@@ -38,12 +44,14 @@ class Gallery{
         $userID = $data['USER'];
         $field = array($userID);
         $userQuery = $this->PDO->statementPDO($statement,$field);
-        $userName = end(explode(' ',$userQuery['pseudo']));
+        $name = explode(' ',$userQuery['pseudo']);
+        $userName = end($name);
         return($userName);
     }
     public function selectImage($data){
         $profileLink = $data['Path']; 
-        $Path = end(explode(' ',$profileLink));
+        $PathLink = explode(' ',$profileLink);
+        $Path = end($PathLink);
         return($Path);
     }
     public function selectProfileImage($data){
@@ -51,7 +59,8 @@ class Gallery{
         $userID = $data['USER'];
         $field = array($userID);
         $userQuery = $this->PDO->statementPDO($statement,$field);
-        $userName = end(explode(' ',$userQuery['profile']));
+        $name = explode(' ',$userQuery['profile']);
+        $userName = end($name);
         return($userName);
     }
     public function checkLikes($data, $pseudo='none',$use = 1){

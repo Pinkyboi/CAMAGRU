@@ -15,7 +15,7 @@
                 $time = $_SESSION['time'] = time();                
         }
         catch(Exeption $e){}
-        echo "<body onresize='adaptSticker()' onkeypress='moveSticker()'>";
+        echo "<body class='camBody' onresize='adaptSticker()' onkeypress='moveSticker()'>";
         navbar($_SESSION);
         if(isset($_SESSION['pseudo']))
                 youCanEdit($_SESSION,$PDO,$_SERVER['PHP_SELF']); 

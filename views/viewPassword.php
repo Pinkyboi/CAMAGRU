@@ -1,7 +1,11 @@
 <?php
     include("../function/connect.php");
     include('../function/CreateHTMLPost.php');
-    include('../function/exitSession.php');   
+    include('../function/exitSession.php');
+    if(isset($_SESSION['pseudo'])){
+        header('Location: ./viewGallery.php');
+        die ;
+    } 
     headCreate();
     echo '<body>';
     navbar();

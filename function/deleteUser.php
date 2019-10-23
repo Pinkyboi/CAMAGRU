@@ -21,7 +21,7 @@
     }
     if(isset($_GET['use']) && $_GET['use'] == 'delTheUser'){
         try{
-            if(isset($_SESSION['pseudo'])){
+            if(isset($_SESSION['pseudo'])){ 
                 $profileLink = profilePic($_SESSION,$PDO);
                 if($profileLink != '../gallery/profile.png')
                     unlink($profileLink);

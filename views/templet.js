@@ -29,10 +29,8 @@ const resendQuery = (function(statement,use=0){
                     parent.appendChild(childs);
                     unwrap(document.querySelector('.removableDiv'));
             }
-            if(use === 3){
-                console.log(this.responseText);
+            if(use === 3)
                 window.location.replace(this.responseText);
-            }
             if(use === 4){
                 if(!this.responseText)
                     window.location.replace("./viewIndex.php");
@@ -121,24 +119,39 @@ function deletePublication(e) {
     })
 }
 function blockUser(e) {
-    let scrollSave = 0;
     var objDiv = document.querySelector(".parent");
     let focus = document.querySelector('.focus');
     let choice = document.querySelector('.confirmation1');
-    let canceled = document.querySelector('.cancel1');
-    var deleted = document.querySelector('.delete1');
     var deleted_icon = e;
     let actual = deleted_icon.parentNode.parentNode.parentNode.parentNode.parentNode;
     focus.style.display = "block";
     choice.style.display = "block";
     choice.firstChild.children[1].firstChild.innerHTML = actual.firstChild.innerHTML;
-    canceled.addEventListener("click", function (e) {
-        focus.style.display = "none";
-        choice.style.display = "none";
-    });
     objDiv.scrollTop = objDiv.scrollHeight;
 }
 
+function ereaseUser(e) {
+    let focus = document.querySelector('.focus');
+    let choice = document.querySelector('.confirmation2');
+    focus.style.display = "block";
+    choice.style.display = "block";
+    focus.style.zIndex = 3;
+}
+
+function cancel1(e){
+    if(e == 1){
+        let focus = document.querySelector('.focus');
+        let choice = document.querySelector('.confirmation1');
+        focus.style.display = "none";
+        choice.style.display = "none";          
+    }
+    else if(e == 2){
+        let focus = document.querySelector('.focus');
+        let choice = document.querySelector('.confirmation2');
+        focus.style.zIndex = 2;
+        choice.style.display = "none";     
+    }
+}
 function addComment(e,comment) {
     let userName = e.parentNode.children[0].children[1].innerHTML;
     let userProfile = e.parentNode.children[0].children[0].src;

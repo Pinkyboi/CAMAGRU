@@ -19,7 +19,7 @@
             }
             else{
                 header('Location: ./viewIndex.php');
-                die();  
+                die;  
             }
         }
         catch(Exeption $e){}

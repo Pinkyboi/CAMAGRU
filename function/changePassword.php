@@ -4,8 +4,8 @@
     function passwordResendVerifie($token,$email,$password,$confirmPassword,$PDO){
         try{
             $statement = "SELECT * FROM `password_reset` WHERE token = ? AND email = ?";
-            $field = array($_GET['token'],$_GET['email']);            
-            if(!$PDO->statementPDO($statement,$field)){
+            $field = array($token,$email);            
+            if($PDO->statementPDO($statement,$field)){
                 $messageSend = array();
                 if(!ft_verifie_password($password,$confirmPassword)){
                     $statement = "UPDATE `users` SET passwrd = ? WHERE email = ?";
@@ -38,7 +38,7 @@
             
         }
     }
-    if(isset($_GET['resetPassword'])&&isset($_GET['password'])&&isset($_GET['email'])&&isset($_GET['confirmPassword'])&&isset($_GET['token'])){
+    if(!empty($_GET)){
         passwordResendVerifie($_GET['token'],$_GET['email'],$_GET['password'],$_GET['confirmPassword'],$PDO);
     }
 ?>

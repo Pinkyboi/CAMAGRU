@@ -3,9 +3,13 @@
     include('../function/verifieRegistration.php');
     include('../function/CreateHTMLPost.php');
     try{
+        if(isset($_SESSION['pseudo'])){
+            header('Location: ./viewGallery.php');
+            die ;
+        } 
         $statement = "SELECT * FROM `password_reset` WHERE token = ? AND email = ?";
         $field = array($_GET['token'],$_GET['email']);
-        if(!$_GET['token'] || !$_GET['email'] || !$PDO->statementPDO($statement,$field)){
+        if(!isset($_GET['token']) || !isset($_GET['email']) || !$PDO->statementPDO($statement,$field) ){
             header('Location: ./viewIndex.php');
             die; 
         }
@@ -26,11 +30,11 @@
         <div id="card">
             <div class="row">
                 <div class="no-padding col-sm-12">
-                    <div class="field" style='padding-top:80px'>
+                    <div class="field" style='padding-top:65px'>
                         <div class="confirm-message">
                             <div style='margin-right: 25px;' class="logo"><img src="../imgs/lock.png" alt=""></div>
                             <h1 class="title">Change your password</h1><br>
-                            <p>Welcome back! in the fields bellow enter your new password and confirm it.<br><span style='font-weight:600'><?php if(isset($_SESSION['email']))echo $_SESSION['email']?></span></p><br>
+                            <p>Welcome back! in the fields bellow enter your new password and confirm it.<br><span style='font-weight:600'><?php if(isset($_GET['email']))echo $_GET['email']?></span></p><br>
                         </div>
                         <form onsubmit = "passwordResend(event)">
                             <input type="hidden" id='token' value = "<?php echo $token?>">

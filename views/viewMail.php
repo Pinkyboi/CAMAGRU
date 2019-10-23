@@ -51,6 +51,8 @@
                 newXML.open('GET',"../function/resendMail.php?use=1&ID="+IDuser,true);
                 newXML.onreadystatechange = function(){
                     if(this.status == 200 && this.readyState == 4){
+                        if(!this.responseText)
+                            window.location.replace("./viewIndex.php");
                         content.innerHTML = this.responseText;
                         content.style.opacity = 1;
                         setTimeout(function(){ content.style.opacity = 0; }, 5000);

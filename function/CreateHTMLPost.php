@@ -139,7 +139,7 @@
                 $youDelete .="<p>you are going to delete this publication, are you sure ?</p>";
                 $youDelete .= "<div class='choices'>";
                 $youDelete .= "<span style='display:none'></span>";
-                $youDelete .= "<div class='choice delete' onclick='deletePostQuery(this)'>Delete</div><div class='choice cancel'>Cancel</div>";
+                $youDelete .= "<div class='choice delete' onclick='deletePostQuery(this)'>Delete</div><div class='choice cancel' >Cancel</div>";
                 $youDelete .= "</div></div></div></div></div>";
                 echo $youDelete;
         }
@@ -152,11 +152,22 @@
                 $youDelete .="<p>by blocking this user you wont be able to see his pictures, are you sure ?</p>";
                 $youDelete .= "<div class='choices'>";
                 $youDelete .= "<span style='display:none'></span>";
-                $youDelete .= "<div class='choice delete delete1' onclick='blockQuery(this)'>Block</div><div class='choice cancel cancel1'>Cancel</div>";
+                $youDelete .= "<div class='choice delete delete1' onclick='blockQuery(this)'>Block</div><div class='choice cancel cancel1' onclick='cancel1(1)'>Cancel</div>";
                 $youDelete .= "</div></div></div></div></div>";
                 echo $youDelete;
         }
-
+        function youCanErease(){
+                $youDelete = "<div class='delConfirmation'><div class='row'>
+                <div class='confirmation confirmation2'>";
+                $youDelete .= "<div class='no-padding col-sm-12'>";
+                
+                $youDelete .="<p>your account and all your pictures,likes and comments will be deleted, are you sure ?</p>";
+                $youDelete .= "<div class='choices'>";
+                $youDelete .= "<span style='display:none'></span>";
+                $youDelete .= "<div class='choice delete' onclick='delUserQuery(this)'>delete</div><div onclick=cancel1(2) class='choice cancel cancel1'>Cancel</div>";
+                $youDelete .= "</div></div></div></div></div>";
+                echo $youDelete;
+        }
         function youCanEdit($SESSION,$PDO,$link='../views/viewGallery.php'){
                 $statement = "SELECT `notification` FROM users WHERE pseudo = ?";
                 $field = array($SESSION['pseudo']);
@@ -188,13 +199,14 @@
                 $youCanEdit .= "<div class='editIcon'><img src='../imgs/edit.png' alt=''></div></div>";
                 $youCanEdit .= "<label style='padding-top: 2px;' for='confirmPassword'>Send notification:</label><label class='switchBox'>";
                 $youCanEdit .= "<input class='checkbox' type='checkbox' id='changeNotif' $checked><span class='slider round'></span></label><br>";
-                $youCanEdit .= "<div class='removeUser' onclick='delUserQuery(this)'><img style='
+                $youCanEdit .= "<div class='removeUser' onclick='ereaseUser(this)'><img style='
                 margin-top: -2px;width: 15px;' padding-left='2px'; src='../imgs/deleteAccount.png'><span class='removeText' style='margin-left:2px'>delete your account.</span></div>";
                 $youCanEdit .= "<div onclick='submitImage()' class='submitChange submitRound'>save the picture</div>";
                 $youCanEdit .= "<div onclick='submitChanges(this)' class='submitChange'>save informations</div>";
                 $youCanEdit .= "<div style='margin-top: 12px' class='loginError errorContainer'>";
                 $youCanEdit .= "</div></div></div></div></div></div>";
                 echo $youCanEdit;
+                youCanErease();
         }
         function viewSinglePost($data,$gallery,$SESSION,$PDO,$use=0){
                 $userName  = $gallery->selectProfileName($data);

@@ -7,6 +7,7 @@
                 thePic = document.querySelector('.thePic'),
                 takePic = document.querySelector('.takePic');
                 containUpload = document.querySelector('#containUpload');
+        let bodyCam = document.querySelector('.camBody');
         width = parseInt(window.getComputedStyle(takePic).width, 10);
         height = width * 0.75;
         navigator.getMedia = (navigator.getUserMedia ||
@@ -110,6 +111,13 @@
                 let checked = document.querySelector('.' + stickername);
                 checked.checked = true;
         })
+        try{
+            bodyCam.addEventListener('kerpress',function(e){
+                moveSticker()
+            })    
+        }
+        catch(error){}
+        
 })();
 
 function clickUpload(e) {
@@ -165,8 +173,7 @@ function hideThePic(ev) {
         containUpload.style.display = "none";
 }
 
-(
-        function moveSticker(){
+function moveSticker(){
         document.addEventListener("keydown", function (event) {
 
                 let sticker = document.querySelector('.sticker');
@@ -220,11 +227,9 @@ function hideThePic(ev) {
                         inputX.value = (posX/(canvaWidth - stickerWidth))/(1/3);                        
                 }
         });           
-})();
+};
 function adaptSticker(){
         let sticker = document.querySelector('.sticker');
-        // let stickerWidth = parseInt(window.getComputedStyle(sticker).width, 10);
-        // let stickerHeight = parseInt(window.getComputedStyle(sticker).height, 10);
         sticker.style.bottom = 6 + 'px'; 
         sticker.style.left = 0 + 'px'; 
 }; 

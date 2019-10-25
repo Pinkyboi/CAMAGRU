@@ -139,32 +139,32 @@
                 $youDelete .="<p>you are going to delete this publication, are you sure ?</p>";
                 $youDelete .= "<div class='choices'>";
                 $youDelete .= "<span style='display:none'></span>";
-                $youDelete .= "<div class='choice delete' onclick='deletePostQuery(this)'>Delete</div><div class='choice cancel' >Cancel</div>";
+                $youDelete .= "<div class='choice delete' onclick='deletePostQuery(this)'>Delete</div><div class='choice cancel' onclick='cancel1(3)'>Cancel</div>";
                 $youDelete .= "</div></div></div></div></div>";
                 echo $youDelete;
         }
 
         function youCanBlock(){
                 $youDelete = "<div class='delConfirmation'><div class='row'>
-                <div class='confirmation confirmation1'>";
+                <div class='confirmation1'>";
                 $youDelete .= "<div class='no-padding col-sm-12'>";
                 
                 $youDelete .="<p>by blocking this user you wont be able to see his pictures, are you sure ?</p>";
                 $youDelete .= "<div class='choices'>";
                 $youDelete .= "<span style='display:none'></span>";
-                $youDelete .= "<div class='choice delete delete1' onclick='blockQuery(this)'>Block</div><div class='choice cancel cancel1' onclick='cancel1(1)'>Cancel</div>";
+                $youDelete .= "<div class='choice delete1' onclick='blockQuery(this)'>Block</div><div class='choice cancel1' onclick='cancel1(1)'>Cancel</div>";
                 $youDelete .= "</div></div></div></div></div>";
                 echo $youDelete;
         }
         function youCanErease(){
                 $youDelete = "<div class='delConfirmation'><div class='row'>
-                <div class='confirmation confirmation2'>";
+                <div class='confirmation2'>";
                 $youDelete .= "<div class='no-padding col-sm-12'>";
                 
                 $youDelete .="<p>your account and all your pictures,likes and comments will be deleted, are you sure ?</p>";
                 $youDelete .= "<div class='choices'>";
                 $youDelete .= "<span style='display:none'></span>";
-                $youDelete .= "<div class='choice delete' onclick='delUserQuery(this)'>delete</div><div onclick=cancel1(2) class='choice cancel cancel1'>Cancel</div>";
+                $youDelete .= "<div class='choice delete3' onclick='delUserQuery(this)'>delete</div><div onclick=cancel1(2) class='choice cancel2'>Cancel</div>";
                 $youDelete .= "</div></div></div></div></div>";
                 echo $youDelete;
         }

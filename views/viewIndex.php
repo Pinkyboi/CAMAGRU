@@ -4,7 +4,7 @@
     include('../function/verifieRegistration.php');
     include('../function/registerSend.php');
     include('../function/CreateHTMLPost.php');
-    headCreate();
+    
     try{
         if(isset($_SESSION['pseudo'])){
                 header("Location: viewGallery.php");
@@ -50,7 +50,8 @@
                 }
                     
     }
-    catch(Exeption $e){}      
+    catch(Exeption $e){}
+        headCreate();      
 ?>
 
 <body onload='loginResposive()' onresize="loginResposive()">
@@ -138,11 +139,11 @@
 
 <script>
         (function(){
-                let hider = document.querySelector('.hider');
-                let login = document.querySelector('.login');
+                var hider = document.querySelector('.hider');
+                var login = document.querySelector('.login');
                 hider.style.width = 408 + "px";
-                let leftError = document.querySelector('#loginError');
-                let rightError = document.querySelector('#registerError');
+                var leftError = document.querySelector('#loginError');
+                var rightError = document.querySelector('#registerError');
                 if(typeof(leftError) != 'undefined' && leftError != null){
                         switchCase();
                         console.log(leftError.innerHTML.length)

@@ -4,10 +4,9 @@
         include('../function/imageUpload.php');
         include('../function/createImage.php');
         include('../function/exitSession.php');
-        headCreate();
         try{
                 if(!isset($_SESSION['profile'])){
-                        header('Location: ./viewIndex.php');
+                        header('Location: viewIndex.php');
                         die;    
                 }
                 else if(isset($_POST['submitButton']))
@@ -15,7 +14,8 @@
                 $time = $_SESSION['time'] = time();                
         }
         catch(Exeption $e){}
-        echo "<body class='camBody' onresize='adaptSticker()' onkeypress='moveSticker()'>";
+        headCreate();
+        echo "<body class='camBody' onresize='adaptSticker()' onkeydown='moveSticker(event)'>";
         navbar($_SESSION);
         if(isset($_SESSION['pseudo']))
                 youCanEdit($_SESSION,$PDO,$_SERVER['PHP_SELF']); 
@@ -116,8 +116,10 @@
                                                         $index = $PDO->statementPDO($statement,$fields);
                                                         $gallery = new Gallery($PDO,$index['ID'],4);
                                                         $datas = $gallery->connectData;
+                                                        echo "<div class='parent'>";
                                                         foreach ($datas as $data)
                                                                 allMiniPost($data,$gallery,$_SESSION,0,$time);
+                                                        echo "</div>";
                                                         youCanDelete();                                                   
                                                 }
                                                 catch(Exeption $e){}

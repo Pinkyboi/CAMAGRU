@@ -1,12 +1,6 @@
 <?php
     include('../function/CreateHTMLPost.php');
     include('../function/exitSession.php');
-    headCreate();
-    navbar($_SESSION);
-    echo "<div class='container main'>";
-    echo "<div class='parent'>";
-    echo "<input class='copyField' style='opacity:0'type='text'>";
-    echo'<body>';
     try{
         if(isset($_FILES['profile']['name'])){
                 uploadImage($_FILES,$_SESSION,$PDO,'profile');
@@ -26,6 +20,12 @@
                         $gallery = new Gallery($PDO,$index,1);
                 $datas = $gallery->connectData;
                 if(!empty($datas)){
+                        headCreate();
+                        navbar($_SESSION);
+                        echo "<div class='container main'>";
+                        echo "<div class='parent'>";
+                        echo "<input class='copyField' style='opacity:0'type='text'>";
+                        echo'<body>';
                         viewSinglePost($datas[0],$gallery,$_SESSION,1);
                         if(isset($_SESSION['pseudo']))
                                 youCanEdit($_SESSION,$PDO,"{$_SERVER['PHP_SELF']}?id={$_GET['id']}"); 
@@ -40,6 +40,7 @@
         }
     }
     catch(Exeption $e){}
+        
     echo "</div>";
     echo "</div>";
     echo "<div class='focus'></div>";
@@ -50,7 +51,7 @@
                 var verifVar = 0;
                 var index = 0;
                 const resend = (function(statement,use=0){
-                let newXML = new XMLHttpRequest();
+                var newXML = new XMLHttpRequest();
                 newXML.open('GET',statement,true);
                 newXML.onreadystatechange = function(){
                     if(this.status == 200 && this.readyState == 4){

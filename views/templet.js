@@ -11,8 +11,8 @@ function pageScroll() {
     scrolldelay = setTimeout(pageScroll,10);
 }
 
-const resendQuery = (function(statement,use=0){
-    let newXML = new XMLHttpRequest();
+var resendQuery = (function(statement,use=0){
+    var newXML = new XMLHttpRequest();
     newXML.open('GET',statement,true);
     
     newXML.onreadystatechange = function(){
@@ -35,7 +35,7 @@ const resendQuery = (function(statement,use=0){
                 if(!this.responseText)
                     window.location.replace("./viewIndex.php");
                 else{
-                    let content = document.querySelector('.errorContainer');
+                    var content = document.querySelector('.errorContainer');
                     jsonMessage = JSON.parse(this.responseText);
                     if(jsonMessage['valid'])
                         content.innerHTML = "<div class='error valide'>"+jsonMessage['valid']+"</div>";
@@ -55,35 +55,35 @@ const resendQuery = (function(statement,use=0){
 function changeLikeIcon(e) {
     track = e.src.split('/');
     likeNumber = parseInt(e.parentNode.children[1].innerHTML, 10);
-    if (track.includes('full-heart.svg')) {
+    if (track.indexOf('full-heart.svg') > 0) {
         e.parentNode.children[1].innerHTML = (likeNumber - 1);
         e.src = "../imgs/heart.svg";
-    } else if (track.includes('heart.svg')) {
+    } else if (track.indexOf('heart.svg') > 0) {
         e.parentNode.children[1].innerHTML = (likeNumber + 1);
         e.src = "../imgs/full-heart.svg";
     }
 }
 
 function hidePic(e) {
-    let containUpload = document.querySelector('#containUpload');
-    let thePic = document.querySelector('.thePic');
-    let takePic = document.querySelector('.takePic');
+    var containUpload = document.querySelector('#containUpload');
+    var thePic = document.querySelector('.thePic');
+    var takePic = document.querySelector('.takePic');
     thePic.style.display = "none";
     takePic.style.display = "block";
     containUpload.style.display = "block";
 }
 function infiniteloading(e){
     dead = false
-    let scrollSave = e;
-    let scrollable = document.documentElement.scrollHeight - window.innerHeight;
-    let scrolled = window.scrollY;
+    var scrollSave = e;
+    var scrollable = document.documentElement.scrollHeight - window.innerHeight;
+    var scrolled = window.scrollY;
     if(Math.ceil(scrolled) === scrollable){
             if(dead == false){
                     dead = true;
                     index = document.querySelectorAll('.post').length;
-                    let spinner = document.querySelector('.spinner');
+                    var spinner = document.querySelector('.spinner');
                     spinner.style.display ='block';
-                    let statement = "../function/CreateHTMLPost.php?use=reload&index="+index;  
+                    var statement = "../function/CreateHTMLPost.php?use=reload&index="+index;  
                     setTimeout(function(){resendQuery(statement,2);}, 2000);
                     setTimeout(function(){spinner.style.display ='none'}, 3000);
                     setTimeout(function(){dead = false}, 4000); 
@@ -95,20 +95,15 @@ function infiniteloading(e){
     } 
 }
 function deletePublication(e) {
-    let scrollSave = 0;
-    let focus = document.querySelector('.focus');
-    let choice = document.querySelector('.confirmation');
-    let canceled = document.querySelector('.cancel');
+    var scrollSave = 0;
+    var focus = document.querySelector('.focus');
+    var choice = document.querySelector('.confirmation');
     var deleted = document.querySelector('.delete');
     var deleted_icon = e;
-    let actual = deleted_icon.parentNode.parentNode.parentNode.parentNode.parentNode;
+    var actual = deleted_icon.parentNode.parentNode.parentNode.parentNode.parentNode;
     focus.style.display = "block";
     choice.style.display = "block";
     choice.firstChild.children[1].firstChild.innerHTML = actual.firstChild.innerHTML;
-    canceled.addEventListener("click", function (e) {
-        focus.style.display = "none";
-        choice.style.display = "none";
-    });
     deleted.addEventListener("click", function (e) {
         if(actual.parentNode){
             actual.parentNode.removeChild(actual);
@@ -120,10 +115,10 @@ function deletePublication(e) {
 }
 function blockUser(e) {
     var objDiv = document.querySelector(".parent");
-    let focus = document.querySelector('.focus');
-    let choice = document.querySelector('.confirmation1');
+    var focus = document.querySelector('.focus');
+    var choice = document.querySelector('.confirmation1');
     var deleted_icon = e;
-    let actual = deleted_icon.parentNode.parentNode.parentNode.parentNode.parentNode;
+    var actual = deleted_icon.parentNode.parentNode.parentNode.parentNode.parentNode;
     focus.style.display = "block";
     choice.style.display = "block";
     choice.firstChild.children[1].firstChild.innerHTML = actual.firstChild.innerHTML;
@@ -131,8 +126,8 @@ function blockUser(e) {
 }
 
 function ereaseUser(e) {
-    let focus = document.querySelector('.focus');
-    let choice = document.querySelector('.confirmation2');
+    var focus = document.querySelector('.focus');
+    var choice = document.querySelector('.confirmation2');
     focus.style.display = "block";
     choice.style.display = "block";
     focus.style.zIndex = 3;
@@ -140,23 +135,29 @@ function ereaseUser(e) {
 
 function cancel1(e){
     if(e == 1){
-        let focus = document.querySelector('.focus');
-        let choice = document.querySelector('.confirmation1');
+        var focus = document.querySelector('.focus');
+        var choice = document.querySelector('.confirmation1');
         focus.style.display = "none";
         choice.style.display = "none";          
     }
     else if(e == 2){
-        let focus = document.querySelector('.focus');
-        let choice = document.querySelector('.confirmation2');
+        var focus = document.querySelector('.focus');
+        var choice = document.querySelector('.confirmation2');
         focus.style.zIndex = 2;
         choice.style.display = "none";     
     }
+    else if(e == 3){
+        var focus = document.querySelector('.focus');
+        var choice = document.querySelector('.confirmation');
+        focus.style.display = "none";
+        choice.style.display = "none";        
+    }
 }
 function addComment(e,comment) {
-    let userName = e.parentNode.children[0].children[1].innerHTML;
-    let userProfile = e.parentNode.children[0].children[0].src;
-    let commentRoot = e.parentNode.parentNode.parentNode.parentNode.querySelector(".comment");
-    let newComment, wrapperImage, wrapperText, profile, mignature, name, quote;
+    var userName = e.parentNode.children[0].children[1].innerHTML;
+    var userProfile = e.parentNode.children[0].children[0].src;
+    var commentRoot = e.parentNode.parentNode.parentNode.parentNode.querySelector(".comment");
+    var newComment, wrapperImage, wrapperText, profile, mignature, name, quote;
     newComment = document.createElement('div');
     name = document.createElement('div');
     quote = document.createElement('div');
@@ -184,16 +185,16 @@ function addComment(e,comment) {
     row.appendChild(wrapperImage);
     row.appendChild(wrapperText);
     newComment.appendChild(row);
-    commentRoot.prepend(newComment);
+    commentRoot.appendChild(newComment);
     e.value = '';
 }
 
 function switchCase(){
     loginResposive();
-    let switchCase = document.querySelector('.switch');
-    let hider = document.querySelector('.hider');
-    let errorRegister = document.querySelector('.errorRegister');
-    let errorLogin = document.querySelector('.errorLogin');
+    var switchCase = document.querySelector('.switch');
+    var hider = document.querySelector('.hider');
+    var errorRegister = document.querySelector('.errorRegister');
+    var errorLogin = document.querySelector('.errorLogin');
     if(switchCase.innerHTML === "already have an account ? <span>Sign in</span>"){
         errorLogin.style.display = 'block';
         switchCase.innerHTML = "New to CAMAGRU ? <span>Sign up</span>";
@@ -208,37 +209,37 @@ function switchCase(){
     }
 }
 function clearSwitch1(e){
-    let errorRegister = document.querySelector('.errorRegister');
-    let errorLogin = document.querySelector('.errorLogin');
-    let login = document.querySelector(".login");
-    let registration = document.querySelector(".registration");
+    var errorRegister = document.querySelector('.errorRegister');
+    var errorLogin = document.querySelector('.errorLogin');
+    var login = document.querySelector(".login");
+    var registration = document.querySelector(".registration");
     login.style.display = 'block';
     registration.style.display = 'none';
     errorRegister.style.display = 'none';
     errorLogin.style.display = 'block';
 }
 function clearSwitch2(e){
-    let errorLogin = document.querySelector('.errorLogin');
-    let errorRegister = document.querySelector('.errorRegister');
-    let login = document.querySelector(".login");
-    let registration = document.querySelector(".registration");
+    var errorLogin = document.querySelector('.errorLogin');
+    var errorRegister = document.querySelector('.errorRegister');
+    var login = document.querySelector(".login");
+    var registration = document.querySelector(".registration");
     login.style.display = 'none';
     errorLogin.style.display = 'none';
     errorRegister.style.display = 'block';
     registration.style.display = 'block';
 }
 function loginResposive(){
-    let login = document.querySelector(".login");
-    let registration = document.querySelector(".registration");
-    let winWidth = window.innerWidth;
-    let hideContain = document.querySelector(".hideContain");
-    let clearSwitch = document.querySelectorAll(".clearSwitch");
+    var login = document.querySelector(".login");
+    var registration = document.querySelector(".registration");
+    var winWidth = window.innerWidth;
+    var hideContain = document.querySelector(".hideContain");
+    var clearSwitch = document.querySelectorAll(".clearSwitch");
     if(winWidth <= 766){
             clearSwitch[0].style.display = 'block';
             clearSwitch[1].style.display = 'block';
             hideContain.style.display = 'none';
             login.style.display = 'none';
-            let leftError = document.querySelector('#loginError');
+            var leftError = document.querySelector('#loginError');
             if(typeof(leftError) != 'undefined' && leftError != null){
                 login.style.display = 'block';
                 registration.style.display = 'none';
@@ -282,9 +283,9 @@ function inputInfocus(e) {
 }
 
 function copyLink(e){
-    let idPost = e.parentNode.parentNode.parentNode.firstChild.innerHTML;
-    let input = document.querySelector('.copyField');
-    let copiedLink = e.nextSibling;
+    var idPost = e.parentNode.parentNode.parentNode.firstChild.innerHTML;
+    var input = document.querySelector('.copyField');
+    var copiedLink = e.nextSibling;
     input.style.display = 'block';
     input.value = "http://10.12.1.4:80"+"/views/viewSinglePost.php?id=" + idPost;
     input.select();
@@ -297,24 +298,24 @@ function copyLink(e){
 
 function emailResend(e){
     e.preventDefault();
-    let email = document.querySelector('.emailRessend').value;
-    let statement = "../function/passwordMail.php?ressendPassword=1&email="+email;
+    var email = document.querySelector('.emailRessend').value;
+    var statement = "../function/passwordMail.php?ressendPassword=1&email="+email;
     resendQuery(statement,4);
 }
 
 function passwordResend(e){
     e.preventDefault();
-    let passwordAll = document.querySelectorAll('.passwordResend');
-    let password = passwordAll[0].value;
-    let confirmPassword = passwordAll[1].value;
-    let token = document.querySelector('#token').value;
-    let email = document.querySelector('#email').value;
-    let statement = "../function/changePassword.php?resetPassword=1&password="+password+"&confirmPassword="+confirmPassword+"&token="+token+"&email="+email;
+    var passwordAll = document.querySelectorAll('.passwordResend');
+    var password = passwordAll[0].value;
+    var confirmPassword = passwordAll[1].value;
+    var token = document.querySelector('#token').value;
+    var email = document.querySelector('#email').value;
+    var statement = "../function/changePassword.php?resetPassword=1&password="+password+"&confirmPassword="+confirmPassword+"&token="+token+"&email="+email;
     resendQuery(statement,4);
 }
 function displayChange(){
-    let focus = document.querySelector('.focus');
-    let changeCard = document.querySelector('.changeCard');
+    var focus = document.querySelector('.focus');
+    var changeCard = document.querySelector('.changeCard');
     focus.style.display = 'block';
     changeCard.style.opacity = 1;
     changeCard.style.display = 'block';
@@ -327,11 +328,11 @@ function displayChange(){
 function addCommentQuery(e){
     document.addEventListener("keypress", function (event) {
     if (event.keyCode == 13) {
-        let comment1 = e.value.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').trim();
-        let comment2 = e.value.trim();
+        var comment1 = e.value.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').trim();
+        var comment2 = e.value.trim();
         if (comment1 != '') {
-            let postID = e.parentNode.parentNode.parentNode.parentNode.firstChild.innerHTML;
-            let statement = "../function/postInteraction.php?use=comment&comment="+comment2+"&postID="+postID; 
+            var postID = e.parentNode.parentNode.parentNode.parentNode.firstChild.innerHTML;
+            var statement = "../function/postInteraction.php?use=comment&comment="+comment2+"&postID="+postID; 
             resendQuery(statement);
             addComment(e,comment1);   
         }
@@ -340,48 +341,48 @@ function addCommentQuery(e){
 }
 
 function blockQuery(e){
-    let postID = e.parentNode.firstChild.innerHTML;
-    let statement = "../function/postInteraction.php?use=block&postID="+postID;
+    var postID = e.parentNode.firstChild.innerHTML;
+    var statement = "../function/postInteraction.php?use=block&postID="+postID;
     resendQuery(statement);
     location.reload(true);
 }
 
 function deletePostQuery(e){
-    let postID = e.parentNode.firstChild.innerHTML;
-    let statement = "../function/postInteraction.php?use=delete&postID="+postID;
+    var postID = e.parentNode.firstChild.innerHTML;
+    var statement = "../function/postInteraction.php?use=delete&postID="+postID;
     resendQuery(statement);
 }
 
 function likesQuery(e){
     changeLikeIcon(e);
-    let postID = e.parentNode.parentNode.parentNode.firstChild.innerHTML;
-    let statement = "../function/postInteraction.php?use=like&postID="+postID;
+    var postID = e.parentNode.parentNode.parentNode.firstChild.innerHTML;
+    var statement = "../function/postInteraction.php?use=like&postID="+postID;
     resendQuery(statement);
 }
 
 function delUserQuery(e){
-    let statement = "../function/deleteUser.php?use=delTheUser";
+    var statement = "../function/deleteUser.php?use=delTheUser";
     resendQuery(statement,3);
 }
 
 function submitChanges(e){
-    let pseudo = document.querySelector('#changeUser').value;
-    let email = document.querySelector('#changeEmail').value;
-    let password = document.querySelector('#changePassword').value;
-    let confirmPassword = document.querySelector('#confirmPassword').value;
-    let notif = document.querySelector('#changeNotif').checked;
-    let statement = "../function/changeInfoAjax.php?changeUser="+pseudo+"&changeEmail="+email+"&changePassword="+password+"&confirmChangePassword="+confirmPassword+"&changeNotif="+notif;
+    var pseudo = document.querySelector('#changeUser').value;
+    var email = document.querySelector('#changeEmail').value;
+    var password = document.querySelector('#changePassword').value;
+    var confirmPassword = document.querySelector('#confirmPassword').value;
+    var notif = document.querySelector('#changeNotif').checked;
+    var statement = "../function/changeInfoAjax.php?changeUser="+pseudo+"&changeEmail="+email+"&changePassword="+password+"&confirmChangePassword="+confirmPassword+"&changeNotif="+notif;
     resendQuery(statement,1);
 }
 
 function disconnect(){
-    let statement = '../function/logout.php';
+    var statement = '../function/logout.php';
     resendQuery(statement,3);
 }
 
 function displayErrorChange(jsonMessage){
-    let emailMsg,pseudoMsg,passwordMsg;
-    let father = document.querySelector('.errorContainer');
+    var emailMsg,pseudoMsg,passwordMsg;
+    var father = document.querySelector('.errorContainer');
     if(jsonMessage['notification']){
         notifMsg = document.createElement('div');
         notifMsg.className = 'error';
@@ -403,7 +404,7 @@ function displayErrorChange(jsonMessage){
             }
                     
             else{
-                    let newEmail = document.querySelector('#changeEmail');
+                    var newEmail = document.querySelector('#changeEmail');
                     newEmail.placeholder = newEmail.value;
                     if(newEmail.classList.contains('errorField'))
                         newEmail.value = '';
@@ -427,7 +428,7 @@ function displayErrorChange(jsonMessage){
             }
                     
             else{
-                    let newPseudo = document.querySelector('#changeUser');
+                    var newPseudo = document.querySelector('#changeUser');
                     newPseudo.placeholder = newPseudo.value;
                     newPseudo.value = '';
                     if(newPseudo.classList.contains('errorField'))
@@ -445,8 +446,8 @@ function displayErrorChange(jsonMessage){
             passwordMsg = document.createElement('div');
             passwordMsg.className = 'error'; 
             passwordMsg.style.display = 'block';
-            let confirmPassword = document.querySelector('#confirmPassword');
-            let changePassword = document.querySelector('#changePassword');
+            var confirmPassword = document.querySelector('#confirmPassword');
+            var changePassword = document.querySelector('#changePassword');
             if(jsonMessage['password'] != 'Your password have been updated'){
                  passwordMsg.innerHTML = jsonMessage['password'];
                  document.querySelector('#changePassword').classList.add('errorField');
@@ -472,32 +473,32 @@ function displayErrorChange(jsonMessage){
 }
 
 function saveThePic(e){
-    let canvas = document.querySelector('#canvas');
-    let canvaUrl = canvas.toDataURL();
-    let hiddenInput = document.querySelector('.encodedCanva');
+    var canvas = document.querySelector('#canvas');
+    var canvaUrl = canvas.toDataURL();
+    var hiddenInput = document.querySelector('.encodedCanva');
     hiddenInput.value = canvaUrl;
 }
 
 function bindImages(e){
     e.preventDefault();
-    let stickers = document.getElementsByName('sticker');
-    let stickerValue = 0;
-    let imageEncoded = document.querySelector('.encodedCanva').value;
-    let i = -1;
+    var stickers = document.getElementsByName('sticker');
+    var stickerValue = 0;
+    var imageEncoded = document.querySelector('.encodedCanva').value;
+    var i = -1;
     while(stickers[++i]){
             if(stickers[i].checked){
                     stickerValue = stickers[i].value;
                     break ;
             }
     }
-    let statement = "../function/createImage.php?encodedCanva="+imageEncoded+"&sticker="+stickerValue;
+    var statement = "../function/createImage.php?encodedCanva="+imageEncoded+"&sticker="+stickerValue;
     resendQuery(statement,0);
 }
 
 function delcomment(e){
-    let commentID = e.children[0].innerHTML;
-    let comment = e.parentNode.parentNode.parentNode.parentNode;
+    var commentID = e.children[0].innerHTML;
+    var comment = e.parentNode.parentNode.parentNode.parentNode;
     comment.style.display = 'none';
-    let statement = "../function/postInteraction.php?use=commentDel&commentID="+commentID;
+    var statement = "../function/postInteraction.php?use=commentDel&commentID="+commentID;
     resendQuery(statement);
 }

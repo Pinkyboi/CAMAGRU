@@ -25,25 +25,25 @@
         <script>
                 
                 (function(e){
-                        let scrollSave = 0;
-                        let index = 0;
-                        let dead = false;
-                        let spinner = document.querySelector('.spinner');
-                        let postVerif = document.querySelectorAll('.post');
-                        let statement = "../function/CreateHTMLPost.php?use=reload&index="+index+"&first=1";
+                        var scrollSave = 0;
+                        var index = 0;
+                        var dead = false;
+                        var spinner = document.querySelector('.spinner');
+                        var postVerif = document.querySelectorAll('.post');
+                        var statement = "../function/CreateHTMLPost.php?use=reload&index="+index+"&first=1";
                         if(!postVerif[0]){
                                 resendQuery(statement,2);
                         }
                         window.addEventListener('scroll',function(){
-                                let scrollable = document.documentElement.scrollHeight - window.innerHeight;
-                                let scrolled = window.scrollY;
+                                var scrollable = document.documentElement.scrollHeight - window.innerHeight;
+                                var scrolled = window.scrollY;
                                 if(Math.ceil(scrolled) === scrollable){
                                         if(dead == false){
                                                 dead = true;
                                                 index = document.querySelectorAll('.post').length;
-                                                let spinner = document.querySelector('.spinner');
+                                                var spinner = document.querySelector('.spinner');
                                                 spinner.style.display ='block';
-                                                let statement = "../function/CreateHTMLPost.php?use=reload&index="+index;  
+                                                var statement = "../function/CreateHTMLPost.php?use=reload&index="+index;  
                                                 setTimeout(function(){resendQuery(statement,2);}, 2000);
                                                 setTimeout(function(){spinner.style.display ='none'}, 3000);
                                                 setTimeout(function(){dead = false}, 4000); 

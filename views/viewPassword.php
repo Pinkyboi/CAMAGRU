@@ -3,7 +3,7 @@
     include('../function/CreateHTMLPost.php');
     include('../function/exitSession.php');
     if(isset($_SESSION['pseudo'])){
-        header('Location: ./viewGallery.php');
+        header('Location: viewGallery.php');
         die ;
     } 
     headCreate();

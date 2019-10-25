@@ -345,7 +345,7 @@ hr {
     background-color: #070707;
 }
 
-.confirmation,.confirmation1{
+.confirmation,.confirmation1,.confirmation2{
     position: fixed;
     left: 50%;
     top: 50%;
@@ -391,12 +391,14 @@ hr {
     box-shadow: 0 0 1px rgba(173, 173, 173, 0.253);
 }
 
-.choices .cancel,.choices .cancel1{
+.choices .cancel,.choices .cancel1,.choices .cancel2{
     cursor: pointer;
     box-shadow: 0 0 1px rgba(173, 173, 173, 0.253);
     padding: 10px 0;
 }
-
+.confirmation p,.confirmation2 p,.confirmation1 p{
+    margin: 20px 15px !important;
+}
 .focus {
     position: fixed;
     padding: 0;
@@ -1118,7 +1120,13 @@ input:checked+.slider:before {
         width: 100% !important;
     }
 }
-
+@media (max-height: 760px){
+    .loginCard {
+        position: relative;
+        
+        margin-top: 20px;      
+    }
+}
 @keyframes shake {
 
     10%,

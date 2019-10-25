@@ -4,7 +4,7 @@
     include('../function/CreateHTMLPost.php');
     try{
         if(isset($_SESSION['pseudo'])){
-            header('Location: ./viewGallery.php');
+            header('Location: viewGallery.php');
             die ;
         } 
         $statement = "SELECT * FROM `password_reset` WHERE token = ? AND email = ?";

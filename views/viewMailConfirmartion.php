@@ -2,9 +2,10 @@
     include('../function/connect.php');
     include('../function/CreateHTMLPost.php');
     include('../function/exitSession.php');
-    headCreate();
-    echo '<body>';
-    navbar();
+    if(isset($_SESSION['pseudo'])){
+        header("Location: viewGallery.php");
+        die;
+    }
     if(!isset($_GET['token']) || !isset($_GET['ID'])){
         header('Location: ./viewIndex.php');
         die ;
@@ -24,6 +25,9 @@
         }
         catch(Exeption $e){}
     }
+    headCreate();
+    echo '<body>';
+    navbar();
 ?>
     <div class="container mail">
         <div id="card">

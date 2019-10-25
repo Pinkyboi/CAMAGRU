@@ -47,7 +47,7 @@
                 const link = document.querySelector('#send');
                 const content = document.querySelector('.valide');
                 const resend = (function(){
-                let newXML = new XMLHttpRequest();
+                var newXML = new XMLHttpRequest();
                 newXML.open('GET',"../function/resendMail.php?use=1&ID="+IDuser,true);
                 newXML.onreadystatechange = function(){
                     if(this.status == 200 && this.readyState == 4){

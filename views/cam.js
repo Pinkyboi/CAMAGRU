@@ -145,7 +145,8 @@ function displayOnCanva(e) {
                                 canvas.getContext('2d').drawImage(image, 0, 0, width, height);
                                 document.querySelector(".sticker").style.bottom = "0";
                         }
-                        image.src = e.target.result;
+                        if(e.target.result != 'data:')
+                                image.src = e.target.result;
                 }
                 reader.readAsDataURL(e.files[0]);
         }

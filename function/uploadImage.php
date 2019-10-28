@@ -1,6 +1,6 @@
 <?php
-    include('../function/imageUpload.php');
-    include('../function/connect.php');
+    include('imageUpload.php');
+    include('connect.php');
 
     session_start();
     if($_FILES['profile']['name']){

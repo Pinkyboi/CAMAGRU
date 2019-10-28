@@ -66,38 +66,38 @@
         var i = 0;
         var sticker = document.querySelector('.sticker');
         var sticker2 = document.querySelector('.sticker2');
-        sticker.style.backgroundImage = "url('../stickers/" + stickerList[0] + ".png')";
-        sticker2.style.backgroundImage = "url('../stickers/" + stickerList[0] + ".png')";
+        sticker.style.backgroundImage = "url('/stickers/" + stickerList[0] + ".png')";
+        sticker2.style.backgroundImage = "url('/stickers/" + stickerList[0] + ".png')";
         var leftArrow = document.querySelector('.leftArrow');
         var rightArrow = document.querySelector('.rightArrow');
 
         leftArrow.addEventListener("click", function () {
                 if (i === 0) {
                         i = stickerList.length - 1;
-                        sticker.style.backgroundImage = "url('../stickers/" + stickerList[
+                        sticker.style.backgroundImage = "url('/stickers/" + stickerList[
                                 i] + ".png')";
-                        sticker2.style.backgroundImage = "url('../stickers/" + stickerList[
+                        sticker2.style.backgroundImage = "url('/stickers/" + stickerList[
                                 i] + ".png')";
                 } else {
                         i--;
-                        sticker.style.backgroundImage = "url('../stickers/" + stickerList[
+                        sticker.style.backgroundImage = "url('/stickers/" + stickerList[
                                 i] + ".png')";
-                        sticker2.style.backgroundImage = "url('../stickers/" + stickerList[
+                        sticker2.style.backgroundImage = "url('/stickers/" + stickerList[
                                 i] + ".png')";
                 }
         })
         rightArrow.addEventListener('click', function () {
                 if (i === stickerList.length - 1) {
                         i = 0;
-                        sticker.style.backgroundImage = "url('../stickers/" + stickerList[
+                        sticker.style.backgroundImage = "url('/stickers/" + stickerList[
                                 i] + ".png')";
-                        sticker2.style.backgroundImage = "url('../stickers/" + stickerList[
+                        sticker2.style.backgroundImage = "url('/stickers/" + stickerList[
                                 i] + ".png')";
                 } else {
                         i++;
-                        sticker.style.backgroundImage = "url('../stickers/" + stickerList[
+                        sticker.style.backgroundImage = "url('/stickers/" + stickerList[
                                 i] + ".png')";
-                        sticker2.style.backgroundImage = "url('../stickers/" + stickerList[
+                        sticker2.style.backgroundImage = "url('/stickers/" + stickerList[
                                 i] + ".png')";
                 }
         })
@@ -181,7 +181,7 @@ function moveSticker(event){
         var canvaHeight = parseInt(window.getComputedStyle(takePic).height, 10);
         posX = (parseInt(sticker.style.left) || 0);
         if(canvaWidth && canvaHeight){
-                if(event.keyCode == 37 || event.which == 37){
+                if(event.keyCode == 65 || event.which == 65){
                         if(posX - Math.floor((canvaWidth - stickerWidth)/3) >= 0){
                                 posX -= Math.floor((canvaWidth - stickerWidth)/3);
                         }
@@ -191,7 +191,7 @@ function moveSticker(event){
                         sticker.style.left = posX + 'px';
                         sticker2.style.left = posX + 'px';
                 }
-                if(event.keyCode == 39 || event.which == 39){
+                if(event.keyCode == 68 || event.which == 68){
                         if(Math.floor((canvaWidth - stickerWidth)/3) + posX  <= Math.floor(canvaWidth - stickerWidth)){
                                 posX += Math.floor((canvaWidth - stickerWidth)/3);
                         }
@@ -199,14 +199,14 @@ function moveSticker(event){
                         sticker2.style.left = posX + 'px';
                 }
                 posY = (parseInt(sticker.style.bottom) || 0);
-                if(event.keyCode == 38 || event.which == 38){
+                if(event.keyCode == 87 || event.which == 87){
                         if(Math.floor((canvaHeight - stickerHeight)/3) + posY  <= Math.floor(canvaHeight - stickerHeight)){
                                 posY += Math.floor((canvaHeight - stickerHeight)/3);
                         }
                         sticker.style.bottom = posY + 'px';
                         sticker2.style.bottom = posY + 'px';
                 }
-                if(event.keyCode == 40 || event.which == 40){
+                if(event.keyCode == 83 || event.which == 83){
                         if(posY - Math.floor((canvaHeight - stickerWidth))/3  > 0){
                                 posY -= Math.floor((canvaHeight - stickerHeight))/3;
                         }

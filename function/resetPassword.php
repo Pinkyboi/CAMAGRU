@@ -1,6 +1,6 @@
 <?php
-    include("../class/connect-class.php");
-    include("../class/mail-class.php");
+    include($_SERVER['DOCUMENT_ROOT']."/class/connect-class.php");
+    include($_SERVER['DOCUMENT_ROOT']."/class/mail-class.php");
     $mail = new Mail();
 
     if (isset($_POST["reset-request-submit"])){

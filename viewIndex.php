@@ -1,57 +1,58 @@
 <?php
-    include('../function/connect.php');
-    include("../function/validateImage.php");
-    include('../function/verifieRegistration.php');
-    include('../function/registerSend.php');
-    include('../function/CreateHTMLPost.php');
-    
-    try{
-        if(isset($_SESSION['pseudo'])){
-                header("Location: viewGallery.php");
-                die ;
-        }
-        if(isset($_POST['submitLogin'])){
-                unset($_SESSION['sent']);
-                $statement = "SELECT * FROM users WHERE (pseudo = ? AND passwrd = ?) OR (email = ? AND passwrd = ?)";
-                $password = hash('whirlpool',$_POST['passwordLogin']);
-                $field = array(htmlentities($_POST['accountName']),$password,htmlentities($_POST['accountName']),$password);
-                $verif = $PDO->statementPDO($statement,$field);
-                if(!$verif){
-                if($PDO->verifyPDO('users','email',$_POST['accountName']) || $PDO->verifyPDO('users','pseudo',$_POST['accountName']))
-                        $errorLogin = "Sorry, that password isn't right";
-                else
-                        $errorLogin = "Sorry, no account correspond";         
+    include('./function/connect.php');
+    include("./function/validateImage.php");
+    include('./function/verifieRegistration.php');
+    include('./function/registerSend.php');
+    include('./function/CreateHTMLPost.php');
+        try{
+                verifyLink($_SERVER['PHP_SELF']);
+                if(isset($_SESSION['pseudo'])){
+                        header("Location: viewGallery.php");
+                        die ;
                 }
-                else{
-                        if($verif['token']){
-                                send('',$_SESSION,$PDO,1,$verif['token']);
-                                header("Location: viewMail.php?ID={$_SESSION['ID']}");    
-                        }  
-                        else{
-                                $_SESSION['pseudo'] = $verif['pseudo'];
-                                $_SESSION['email']  = $verif['email'];
-                                $_SESSION['profile'] = profilePic($_SESSION,$PDO);
-                                header("Location: viewGallery.php");     
+                if(isset($_POST['submitLogin'])){
+                        unset($_SESSION['sent']);
+                        $statement = "SELECT * FROM users WHERE (pseudo = ? AND passwrd = ?) OR (email = ? AND passwrd = ?)";
+                        $password = hash('whirlpool',$_POST['passwordLogin']);
+                        $field = array(htmlentities($_POST['accountName']),$password,htmlentities($_POST['accountName']),$password);
+                        $verif = $PDO->statementPDO($statement,$field);
+                        if(!$verif){
+                        if($PDO->verifyPDO('users','email',$_POST['accountName']) || $PDO->verifyPDO('users','pseudo',$_POST['accountName']))
+                                $errorLogin = "Sorry, that password isn't right";
+                        else
+                                $errorLogin = "Sorry, no account correspond";         
                         }
-                die();
-                }  
-        }
-        else if(isset($_POST['submitRegistration'])){
-                $errpsdo = '';
-                $errmail = '';
-                $errpass = '';
-                $errorRegistation = array('errpsdo'=>$errpsdo,'errmail'=>$errmail,'errpass'=>$errpass);
+                        else{
+                                if($verif['token']){
+                                        send('',$_SESSION,$PDO,1,$verif['token']);
+                                        header("Location: viewMail.php?ID={$_SESSION['ID']}");    
+                                }  
+                                else{
+                                        $_SESSION['pseudo'] = $verif['pseudo'];
+                                        $_SESSION['email']  = $verif['email'];
+                                        $_SESSION['profile'] = profilePic($_SESSION,$PDO);
+                                        header("Location: viewGallery.php");     
+                                }
+                        die();
+                        }  
+                }
+                else if(isset($_POST['submitRegistration'])){
+                        $errpsdo = '';
+                        $errmail = '';
+                        $errpass = '';
+                        $errorRegistation = array('errpsdo'=>$errpsdo,'errmail'=>$errmail,'errpass'=>$errpass);
                         if(ft_verifie_field($_POST,$PDO,$errorRegistation)){
                                 send($_POST,$_SESSION,$PDO);
                                 $mail->verificationMail($_POST['emailRegistration'], $_POST['userRegistration'], $_SESSION['ID'], $_SESSION['token']);
                                 header("Location: viewMail.php?ID={$_SESSION['ID']}");
-                                die();
+                                die ;
                         }             
                 }
-                    
-    }
-    catch(Exeption $e){}
-        headCreate();      
+                        
+        }
+        catch(Exeption $e){}
+        headCreate();
+          
 ?>
 
 <body onload='loginResposive()' onresize="loginResposive()">
@@ -69,7 +70,7 @@
                                 <div class="row">
                                                 <div class="no-padding col-sm-12 col-md-5">
                                                         <div class="registration">
-                                                                <img id="miniLogo" src="../imgs/logo-mini.svg" alt="logo-camagru">
+                                                                <img id="miniLogo" src="/imgs/logo-mini.svg" alt="logo-camagru">
                                                                 <form class="registionForm" action="viewIndex.php" method="POST">
                                                                         <input autocomplete="off" class="<?php if(isset($errorRegistation['errpsdo'])) echo 'errorField'?>"name="userRegistration" type="text"
                                                                                 placeholder="username" value=<?php if(!isset($_SESSION['sent']) && isset($_POST['userRegistration'])) echo htmlentities($_POST['userRegistration'])?>><br>
@@ -108,7 +109,7 @@
                                         </div>
                                         <div class="no-padding col-sm-12 col-md-5">
                                                 <div class="login">
-                                                        <img id="miniLogo" src="../imgs/logo-mini.svg" alt="logo-camagru">
+                                                        <img id="miniLogo" src="/imgs/logo-mini.svg" alt="logo-camagru">
                                                         <form class="loginForm" action="viewIndex.php" method="POST">
                                                                 <input autocomplete="off" class="<?php if(isset($errorLogin)) echo 'errorField'?>" type="text" name="accountName"
                                                                                 placeholder="email or username"value=<?php if(isset($_POST['accountName']))echo $_POST['accountName']?>><br>

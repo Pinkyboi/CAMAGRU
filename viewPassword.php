@@ -1,7 +1,8 @@
 <?php
-    include("../function/connect.php");
-    include('../function/CreateHTMLPost.php');
-    include('../function/exitSession.php');
+    include("./function/connect.php");
+    include('./function/CreateHTMLPost.php');
+    include('./function/exitSession.php');
+    verifyLink($_SERVER['PHP_SELF']);
     if(isset($_SESSION['pseudo'])){
         header('Location: viewGallery.php');
         die ;
@@ -17,7 +18,7 @@
                 <div class="no-padding col-sm-12">
                     <div class="field">
                         <div class="confirm-message">
-                            <div class="logo"><img src="../imgs/password.png"></div>
+                            <div class="logo"><img src="/imgs/password.png"></div>
                             <h1 class="title">Reset your password</h1><br>
                             <p>An email will be send to you with instruction on how reset your password.<br>
                                 <form onsubmit = "emailResend(event)"class="send-email" action="view_password.php" method="GET">

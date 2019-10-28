@@ -18,7 +18,7 @@
                   <h1 style = 'color: #E2E1E1;font-size: 30px;'>$subject</h1>
                   <p style='color: #A7A3A4;font-size: 14px; font-weight: 600; margin-top: 20px;margin-bottom: 15px;'> Hello $user</p>
                   <p style='color: #A7A3A4;font-size: 14px;'>To confirm your account enter this link</p>
-                  <a href= http://10.12.1.4:80/views/viewMailConfirmartion.php?token=$token&ID=$id><button style='margin-top: 10px; border: none;border-radius: 5px;font-size: 15px;color: #E2E1E1;padding: 5px 15px;background-color: rgb(170, 73, 92);'>Verify your email</button></a>
+                  <a href= http://10.12.1.4/viewMailConfirmartion.php?token=$token&ID=$id><button style='margin-top: 10px; border: none;border-radius: 5px;font-size: 15px;color: #E2E1E1;padding: 5px 15px;background-color: rgb(170, 73, 92);'>Verify your email</button></a>
                 </div>
             </body>
           </html>
@@ -43,7 +43,7 @@
                 <h1 style = 'color: #E2E1E1;font-size: 30px;'>$subject</h1>
                 <p style='color: #A7A3A4;font-size: 14px; font-weight: 600; margin-top: 20px;margin-bottom: 15px;'> Hello $liked</p>
                 <p style='color: #A7A3A4;font-size: 14px;'>Your post has been liked by <span style='font-weight: 600'>$liker</span></p>
-                <a target='_blank' href= http://10.12.1.4:80/views/viewSinglePost.php?id=$id><button style='margin-top: 10px; border: none;border-radius: 5px;font-size: 15px;color: #E2E1E1;padding: 5px 15px;background-color: rgb(170, 73, 92);'>Your post</button></a>
+                <a target='_blank' href= http://10.12.1.4/viewSinglePost.php?id=$id><button style='margin-top: 10px; border: none;border-radius: 5px;font-size: 15px;color: #E2E1E1;padding: 5px 15px;background-color: rgb(170, 73, 92);'>Your post</button></a>
               </div>
             </body>
           </html>
@@ -69,7 +69,7 @@
                 <h1 style = 'color: #E2E1E1;font-size: 30px;'>$subject</h1>
                 <p style='color: #A7A3A4;font-size: 14px; font-weight: 600; margin-top: 20px;margin-bottom: 15px;'> Hello $commented </p>
                 <p style='color: #A7A3A4;font-size: 14px;'>Your post has been commented by <span style='font-weight: 600'>$commenter</span></p>
-                <a target='_blank' href= http://10.12.1.4:80/views/viewSinglePost.php?id=$id><button style='margin-top: 10px; border: none;border-radius: 5px;font-size: 15px;color: #E2E1E1;padding: 5px 15px;background-color: rgb(170, 73, 92);'>Your post</button></a>
+                <a target='_blank' href= http://10.12.1.4:80/viewSinglePost.php?id=$id><button style='margin-top: 10px; border: none;border-radius: 5px;font-size: 15px;color: #E2E1E1;padding: 5px 15px;background-color: rgb(170, 73, 92);'>Your post</button></a>
               </div>
             </body>
           </html>
@@ -94,7 +94,7 @@
                 <h1 style = 'color: #E2E1E1;font-size: 30px;'>$subject</h1>
                 <p style='color: #A7A3A4;font-size: 14px; font-weight: 600; margin-top: 20px;margin-bottom: 15px;'> Hello $user </p>
                 <p style='color: #A7A3A4;font-size: 14px;'>Here is your link to change your password</p>
-                <a target='_blank' href= http://10.12.1.4:80/views/viewChangePassword.php?token=$token&email=$email><button style='margin-top: 10px; border: none;border-radius: 5px;font-size: 15px;color: #E2E1E1;padding: 5px 15px;background-color: rgb(170, 73, 92);'>Click here</button></a>
+                <a target='_blank' href= http://10.12.1.4:80/viewChangePassword.php?token=$token&email=$email><button style='margin-top: 10px; border: none;border-radius: 5px;font-size: 15px;color: #E2E1E1;padding: 5px 15px;background-color: rgb(170, 73, 92);'>Click here</button></a>
               </div>
             </body>
           </html>

@@ -23,14 +23,14 @@
         try{
             if(isset($_SESSION['pseudo'])){ 
                 $profileLink = profilePic($_SESSION,$PDO);
-                if($profileLink != '../gallery/profile.png')
+                if($profileLink != '/gallery/profile.png')
                     unlink($profileLink);
                 $ID = pseudoID($PDO);
                 delAllImage($PDO,$ID);
                 unset($_SESSION);
                 session_destroy();
                 session_write_close();
-                echo './viewIndex.php';
+                echo 'viewIndex.php';
             }
         }
         catch(Exeption $e){}

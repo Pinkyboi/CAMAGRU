@@ -79,7 +79,7 @@ hr {
     height: 20px;
 }
 
-.profile .delete-icon:hover {
+.profile .delete-icon:hover,.switch:hover,.removeUser:hover {
     cursor: pointer;
 }
 
@@ -384,7 +384,7 @@ hr {
     margin-top: 10px;
 }
 
-.choices .delete,.choices .delete1{
+.choices .delete,.choices .delete1,.choices .delete3{
     cursor: pointer;
     color: #CF6679;
     padding: 10px 0;
@@ -462,14 +462,14 @@ hr {
     width: 2em;
     height: 2em;
     margin: 10px;
-    background-image: url("../imgs/right-arrow.png");
+    background-image: url("/imgs/right-arrow.png");
 }
 
 .arrows .leftArrow {
     width: 2em;
     height: 2em;
     margin: 10px;
-    background-image: url("../imgs/left-arrow.png");
+    background-image: url("/imgs/left-arrow.png");
 }
 
 .arrows .rightArrow:hover,
@@ -695,7 +695,7 @@ form .sticker-input {
 .hider {
     position: absolute;
     z-index: 2;
-    background-image: url("../imgs/hider.png");
+    background-image: url("/imgs/hider.png");
     border-radius: 0 5px 5px 0;
     background-size: cover;
     height: 500px;
@@ -919,7 +919,7 @@ input[type='submit']:focus {
     border-radius: 50%;
     background-color: rgba(25, 25, 25);
     border: 2px solid rgba(25, 25, 25);
-    background-image: url('../imgs/edit.png');
+    background-image: url('/imgs/edit.png');
     background-size: 50px;
     background-repeat: no-repeat;
     background-position: center

@@ -5,7 +5,7 @@
                 $token  = md5(uniqid($_POST['userRegistration'], true));
                 $SESSION['token'] = $token;
                 $password = hash('whirlpool',$_POST['passwordRegistration']);
-                $statement = "INSERT INTO  users VALUES (NULL, ?,?,?,?,'../gallery/profile.png','1')";
+                $statement = "INSERT INTO  users VALUES (NULL, ?,?,?,?,'/gallery/profile.png','1')";
                 $fields = array(htmlentities($_POST['userRegistration']),htmlentities($_POST['emailRegistration']),$password,$SESSION['token']);
                 $PDO->statementPDO($statement, $fields,0);            
             }

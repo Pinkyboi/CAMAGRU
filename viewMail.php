@@ -1,8 +1,9 @@
 <?php
-    include('../function/connect.php');
-    include('../function/resendMail.php');
-    include('../function/CreateHTMLPost.php');
-    include('../function/exitSession.php');
+    include('./function/connect.php');
+    include('./function/resendMail.php');
+    include('./function/CreateHTMLPost.php');
+    include('./function/exitSession.php');
+    verifyLink($_SERVER['PHP_SELF']);
     if(isset($_SESSION['pseudo'])){
         header("Location: viewGallery.php");
         die;
@@ -21,7 +22,7 @@
                 <div class="no-padding col-sm-12">
                     <div class="field">
                         <div class="confirm-message">
-                            <div class="logo"><img src="../imgs/mail.png" alt=""></div>
+                            <div class="logo"><img src="/imgs/mail.png" alt=""></div>
                             <h1 class="title">Verification link sent!</h1><br>
                             <p>Your acount has been sccessfully registred to complete the precess enter the link sent to
                                 your email<br><span id="email"><?php if(isset($_SESSION['email']))echo $_SESSION['email']?></span></p><br>
@@ -48,7 +49,7 @@
                 const content = document.querySelector('.valide');
                 const resend = (function(){
                 var newXML = new XMLHttpRequest();
-                newXML.open('GET',"../function/resendMail.php?use=1&ID="+IDuser,true);
+                newXML.open('GET',"/function/resendMail.php?use=1&ID="+IDuser,true);
                 newXML.onreadystatechange = function(){
                     if(this.status == 200 && this.readyState == 4){
                         if(!this.responseText)

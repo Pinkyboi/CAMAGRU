@@ -1,8 +1,9 @@
 <?php
-    include('../function/connect.php');
-    include('../function/verifieRegistration.php');
-    include('../function/CreateHTMLPost.php');
+    include('./function/connect.php');
+    include('./function/verifieRegistration.php');
+    include('./function/CreateHTMLPost.php');
     try{
+        verifyLink($_SERVER['PHP_SELF']);
         if(isset($_SESSION['pseudo'])){
             header('Location: viewGallery.php');
             die ;
@@ -32,7 +33,7 @@
                 <div class="no-padding col-sm-12">
                     <div class="field" style='padding-top:65px'>
                         <div class="confirm-message">
-                            <div style='margin-right: 25px;' class="logo"><img src="../imgs/lock.png" alt=""></div>
+                            <div style='margin-right: 25px;' class="logo"><img src="/imgs/lock.png" alt=""></div>
                             <h1 class="title">Change your password</h1><br>
                             <p>Welcome back! in the fields bellow enter your new password and confirm it.<br><span style='font-weight:600'><?php if(isset($_GET['email']))echo $_GET['email']?></span></p><br>
                         </div>

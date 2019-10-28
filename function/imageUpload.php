@@ -36,10 +36,10 @@
         
         if($FILE['profile']){
             $profile = profilePic($SESSION,$PDO);
-            $target = "../gallery/" . uniqid($fileName) . "." . $fileExtension;
-            if($profile != '../gallery/profile.png')
+            $target = "/"."gallery/" . uniqid($fileName) . "." . $fileExtension;
+            if($profile != '/gallery/profile.png')
                 unlink(profilePic($SESSION,$PDO));
-            if (move_uploaded_file($fileTmpName, $target)) {
+            if (move_uploaded_file($fileTmpName,  $_SERVER['DOCUMENT_ROOT'] . $target)) {
                 $field = array($SESSION['pseudo'],$SESSION['email']);
                 $ID = "SELECT ID FROM users WHERE pseudo = ? AND email = ?";
                 $ID_USER = $PDO->statementPDO($ID,$field);

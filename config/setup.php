@@ -1,5 +1,5 @@
 <?php 
-    include_once('../function/autoloader.php');
+    include_once($_SERVER['DOCUMENT_ROOT'].'/function/autoloader.php');
     include_once('database.php');
     try{
       $PDOFIRST = new PDO("mysql:host=$HOST;", $DB_USER, $DB_PASSWORD);
@@ -13,4 +13,4 @@
    catch(Exeption $e){
       echo $e;
    }
-   header('Location: ../views/viewIndex.php');
+   header('Location: /viewIndex.php');

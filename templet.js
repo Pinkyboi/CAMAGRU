@@ -57,10 +57,10 @@ function changeLikeIcon(e) {
     likeNumber = parseInt(e.parentNode.children[1].innerHTML, 10);
     if (track.indexOf('full-heart.svg') > 0) {
         e.parentNode.children[1].innerHTML = (likeNumber - 1);
-        e.src = "../imgs/heart.svg";
+        e.src = "/imgs/heart.svg";
     } else if (track.indexOf('heart.svg') > 0) {
         e.parentNode.children[1].innerHTML = (likeNumber + 1);
-        e.src = "../imgs/full-heart.svg";
+        e.src = "/imgs/full-heart.svg";
     }
 }
 
@@ -83,7 +83,7 @@ function infiniteloading(e){
                     index = document.querySelectorAll('.post').length;
                     var spinner = document.querySelector('.spinner');
                     spinner.style.display ='block';
-                    var statement = "../function/CreateHTMLPost.php?use=reload&index="+index;  
+                    var statement = "/function/CreateHTMLPost.php?use=reload&index="+index;  
                     setTimeout(function(){resendQuery(statement,2);}, 2000);
                     setTimeout(function(){spinner.style.display ='none'}, 3000);
                     setTimeout(function(){dead = false}, 4000); 
@@ -287,7 +287,7 @@ function copyLink(e){
     var input = document.querySelector('.copyField');
     var copiedLink = e.nextSibling;
     input.style.display = 'block';
-    input.value = "http://10.12.1.4:80"+"/views/viewSinglePost.php?id=" + idPost;
+    input.value = "http://10.12.1.4"+"/viewSinglePost.php?id=" + idPost;
     input.select();
     document.execCommand("Copy");
     input.setSelectionRange(0, 99999);
@@ -299,7 +299,7 @@ function copyLink(e){
 function emailResend(e){
     e.preventDefault();
     var email = document.querySelector('.emailRessend').value;
-    var statement = "../function/passwordMail.php?ressendPassword=1&email="+email;
+    var statement = "/function/passwordMail.php?ressendPassword=1&email="+email;
     resendQuery(statement,4);
 }
 
@@ -310,7 +310,7 @@ function passwordResend(e){
     var confirmPassword = passwordAll[1].value;
     var token = document.querySelector('#token').value;
     var email = document.querySelector('#email').value;
-    var statement = "../function/changePassword.php?resetPassword=1&password="+password+"&confirmPassword="+confirmPassword+"&token="+token+"&email="+email;
+    var statement = "/function/changePassword.php?resetPassword=1&password="+password+"&confirmPassword="+confirmPassword+"&token="+token+"&email="+email;
     resendQuery(statement,4);
 }
 function displayChange(){
@@ -332,7 +332,7 @@ function addCommentQuery(e){
         var comment2 = e.value.trim();
         if (comment1 != '') {
             var postID = e.parentNode.parentNode.parentNode.parentNode.firstChild.innerHTML;
-            var statement = "../function/postInteraction.php?use=comment&comment="+comment2+"&postID="+postID; 
+            var statement = "/function/postInteraction.php?use=comment&comment="+comment2+"&postID="+postID; 
             resendQuery(statement);
             addComment(e,comment1);   
         }
@@ -342,26 +342,26 @@ function addCommentQuery(e){
 
 function blockQuery(e){
     var postID = e.parentNode.firstChild.innerHTML;
-    var statement = "../function/postInteraction.php?use=block&postID="+postID;
+    var statement = "/function/postInteraction.php?use=block&postID="+postID;
     resendQuery(statement);
     location.reload(true);
 }
 
 function deletePostQuery(e){
     var postID = e.parentNode.firstChild.innerHTML;
-    var statement = "../function/postInteraction.php?use=delete&postID="+postID;
+    var statement = "/function/postInteraction.php?use=delete&postID="+postID;
     resendQuery(statement);
 }
 
 function likesQuery(e){
     changeLikeIcon(e);
     var postID = e.parentNode.parentNode.parentNode.firstChild.innerHTML;
-    var statement = "../function/postInteraction.php?use=like&postID="+postID;
+    var statement = "/function/postInteraction.php?use=like&postID="+postID;
     resendQuery(statement);
 }
 
 function delUserQuery(e){
-    var statement = "../function/deleteUser.php?use=delTheUser";
+    var statement = "/function/deleteUser.php?use=delTheUser";
     resendQuery(statement,3);
 }
 
@@ -371,12 +371,12 @@ function submitChanges(e){
     var password = document.querySelector('#changePassword').value;
     var confirmPassword = document.querySelector('#confirmPassword').value;
     var notif = document.querySelector('#changeNotif').checked;
-    var statement = "../function/changeInfoAjax.php?changeUser="+pseudo+"&changeEmail="+email+"&changePassword="+password+"&confirmChangePassword="+confirmPassword+"&changeNotif="+notif;
+    var statement = "/function/changeInfoAjax.php?changeUser="+pseudo+"&changeEmail="+email+"&changePassword="+password+"&confirmChangePassword="+confirmPassword+"&changeNotif="+notif;
     resendQuery(statement,1);
 }
 
 function disconnect(){
-    var statement = '../function/logout.php';
+    var statement = '/function/logout.php';
     resendQuery(statement,3);
 }
 
@@ -491,7 +491,7 @@ function bindImages(e){
                     break ;
             }
     }
-    var statement = "../function/createImage.php?encodedCanva="+imageEncoded+"&sticker="+stickerValue;
+    var statement = "/function/createImage.php?encodedCanva="+imageEncoded+"&sticker="+stickerValue;
     resendQuery(statement,0);
 }
 
@@ -499,6 +499,6 @@ function delcomment(e){
     var commentID = e.children[0].innerHTML;
     var comment = e.parentNode.parentNode.parentNode.parentNode;
     comment.style.display = 'none';
-    var statement = "../function/postInteraction.php?use=commentDel&commentID="+commentID;
+    var statement = "/function/postInteraction.php?use=commentDel&commentID="+commentID;
     resendQuery(statement);
 }

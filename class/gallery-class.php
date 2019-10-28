@@ -18,10 +18,13 @@ class Gallery{
             $_PDOverif->execute($offset);   
         }
         else if($number == 3){
-            $statement = "SELECT * FROM `images` WHERE USER NOT IN (SELECT blocked_id FROM block WHERE blocker_id = $userID)AND ID = ?";
+            if(!empty($index) && $userID)
+                    $statement = "SELECT * FROM `images` WHERE USER NOT IN (SELECT blocked_id FROM block WHERE blocker_id = $userID) AND ID = ?";
+            else
+                $statement = "SELECT * FROM `images` LIMIT 5 OFFSET ?";
             $_PDOverif = $PDO->_PDO->prepare($statement);
             $offset = array($index);
-            $_PDOverif->execute($offset);    
+            $_PDOverif->execute($offset);
         }
         else if($number == 4){
             $statement = "SELECT * FROM `images` WHERE USER = ?";

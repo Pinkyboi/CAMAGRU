@@ -1,17 +1,17 @@
 <?php
     function getPathSticker($sticker){
         if($sticker === '1')
-            return('../stickers/gnomed.png');
+            return($_SERVER['DOCUMENT_ROOT'].'/stickers/gnomed.png');
         else if($sticker === '2')
-            return('../stickers/punpun.png');
+            return($_SERVER['DOCUMENT_ROOT'].'/stickers/punpun.png');
         else if($sticker === '3')
-            return('../stickers/ricardo.png');
+            return($_SERVER['DOCUMENT_ROOT'].'/stickers/ricardo.png');
         else if($sticker === '4')
-            return('../stickers/toby.png');
+            return($_SERVER['DOCUMENT_ROOT'].'/stickers/toby.png');
         else if($sticker === '5')
-            return('../stickers/trump-pepe.png');
+            return($_SERVER['DOCUMENT_ROOT'].'/stickers/trump-pepe.png');
         else
-            return('../stickers/dio.png');
+            return($_SERVER['DOCUMENT_ROOT'].'/stickers/dio.png');
     }
     function addNewPost($link,$PDO,$SESSION){
         $statement = 'SELECT ID FROM `users` WHERE pseudo = ?';
@@ -26,10 +26,10 @@
             if(isset($SESSION['time']) && $SESSION['time'] == $POST['time']){
                 $sticker = getPathSticker($POST['sticker']);
                 $rawCanvas = $POST['encodedCanva'];
-                $folderPath = "../gallery/";
+                $folderPath = "/"."gallery/";
                 $filtredCanva = str_replace('data:image/png;base64,', '',$rawCanvas);
                 if(empty($filtredCanva)){
-                    header('Location: ./viewCamera.php');
+                    header('Location:'.$_SERVER['DOCUMENT_ROOT'].'/viewCamera.php');
                     die;
                 }
                 $encodedCanva = str_replace(' ', '+',$filtredCanva);
@@ -60,7 +60,7 @@
                             $offsetY = $destHeight - $stickerY;
                         imagecopy($cleanCanva, $sticker, $offsetX , $offsetY, 0, 0,$stickerW,$stickerY);
                         $file = $folderPath . uniqid() . '.png';
-                        imagepng($cleanCanva, $file);
+                        imagepng($cleanCanva, $_SERVER['DOCUMENT_ROOT'].$file);
                         addNewPost($file,$PDO,$SESSION); 
                     }
                 }

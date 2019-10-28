@@ -1,8 +1,9 @@
 <?php
-        include('../function/connect.php');
-        include('../function/CreateHTMLPost.php');
-        include('../function/imageUpload.php');
-        include('../function/exitSession.php');    
+        include('./function/connect.php');
+        include('./function/CreateHTMLPost.php');
+        include('./function/imageUpload.php');
+        include('./function/exitSession.php');
+        verifyLink($_SERVER['PHP_SELF']); 
         headCreate();
         echo '<body>';
         navbar($_SESSION);
@@ -30,7 +31,7 @@
                         var dead = false;
                         var spinner = document.querySelector('.spinner');
                         var postVerif = document.querySelectorAll('.post');
-                        var statement = "../function/CreateHTMLPost.php?use=reload&index="+index+"&first=1";
+                        var statement = "./function/CreateHTMLPost.php?use=reload&index="+index+"&first=1";
                         if(!postVerif[0]){
                                 resendQuery(statement,2);
                         }
@@ -43,7 +44,7 @@
                                                 index = document.querySelectorAll('.post').length;
                                                 var spinner = document.querySelector('.spinner');
                                                 spinner.style.display ='block';
-                                                var statement = "../function/CreateHTMLPost.php?use=reload&index="+index;  
+                                                var statement = "./function/CreateHTMLPost.php?use=reload&index="+index;  
                                                 setTimeout(function(){resendQuery(statement,2);}, 2000);
                                                 setTimeout(function(){spinner.style.display ='none'}, 3000);
                                                 setTimeout(function(){dead = false}, 4000); 

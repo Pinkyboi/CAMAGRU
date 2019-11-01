@@ -3,7 +3,8 @@
         include('./function/CreateHTMLPost.php');
         include('./function/imageUpload.php');
         include('./function/exitSession.php');
-        verifyLink($_SERVER['PHP_SELF']); 
+        verifyLink($_SERVER['PHP_SELF']);
+        mailResend($PDO);
         headCreate();
         echo '<body>';
         navbar($_SESSION);

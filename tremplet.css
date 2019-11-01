@@ -29,6 +29,10 @@ a:hover {
     text-decoration: none;
 }
 
+*:focus {
+    outline: none !important;
+}
+
 body {
     color: #E1E1E1 !important;
     background-color: #1a1919 !important;
@@ -79,7 +83,7 @@ hr {
     height: 20px;
 }
 
-.profile .delete-icon:hover,.switch:hover,.removeUser:hover {
+.profile .delete-icon:hover,.switch:hover,.removeUser:hover,#send:hover{
     cursor: pointer;
 }
 
@@ -143,7 +147,6 @@ hr {
     padding: 6px 0;
     width: 35px;
     height: 35px;
-    /* margin-left: 3px; */
 }
 
 .sendIcon {
@@ -1123,7 +1126,10 @@ input:checked+.slider:before {
 @media (max-height: 760px){
     .loginCard {
         position: relative;
-        
+        left: 0% !important;
+        top: 0% !important;
+        border-radius: 5px;
+        transform: translate(0%, 0%) !important;
         margin-top: 20px;      
     }
 }

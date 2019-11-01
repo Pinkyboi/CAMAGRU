@@ -1,8 +1,7 @@
 <?php
-    include('./function/connect.php');
-    include('./function/CreateHTMLPost.php');
-    include('./function/exitSession.php');
-    verifyLink($_SERVER['PHP_SELF']);
+    include('function/connect.php');
+    include('function/CreateHTMLPost.php');
+    include('function/exitSession.php');
     if(isset($_SESSION['pseudo'])){
         header("Location: viewGallery.php");
         die;

@@ -11,6 +11,32 @@
                         die ; 
                 }
         }
+
+        function mailResend($PDO){
+                try{
+                        if($_SESSION['pseudo']){
+                                $statement = 'SELECT * FROM users WHERE pseudo = ?';
+                                $field = array($_SESSION['pseudo']);
+                                $info = $PDO->statementPDO($statement,$field);
+                                if($info['token']){
+                                        unset($SESSION);
+                                        session_destroy();
+                                        session_write_close();
+                                        header("Location: viewMail.php?ID={$info['ID']}");
+                                        die ;
+                                }
+                                else if(!$info['pseudo']){
+                                        unset($SESSION);
+                                        session_destroy();
+                                        session_write_close();
+                                        header("Location: viewIndex.php");
+                                        die ;
+                                }                                
+                        }
+                }
+                catch(Exeption $e){}
+        }
+
         function headCreate(){
                 $head = "<!DOCTYPE html><html lang='en'><head>";
                 $head .="<meta charset='UTF-8'><meta name='viewport' content='width=device-width, initial-scale=1.0'>";

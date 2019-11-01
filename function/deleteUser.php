@@ -8,7 +8,7 @@
         $field = array($ID);
         $paths = $PDO->statementPDO($statement,$field,2);
         foreach($paths as $path){
-            unlink($path[0]);
+            unlink($_SERVER['DOCUMENT_ROOT'].$path[0]);
         }
         $PDO->statementPDO($statement2,$field);
     }

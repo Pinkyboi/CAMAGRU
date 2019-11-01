@@ -6,6 +6,7 @@
         include('./function/exitSession.php');
         try{
                 verifyLink($_SERVER['PHP_SELF']);
+                mailResend($PDO);
                 if(!isset($_SESSION['profile'])){
                         header('Location: viewIndex.php');
                         die;    

@@ -7,7 +7,7 @@
         mailResend($PDO);
         headCreate();
         echo '<body>';
-        navbar($_SESSION);
+        navbar();
         echo "<div class='container main'>";
         echo "<div class='parent'>";
         echo "<input class='copyField' style='opacity:0'type='text'>";

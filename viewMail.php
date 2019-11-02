@@ -14,7 +14,7 @@
     }
     headCreate();
     echo '<body>';
-    navbar($_SESSION);
+    navbar();
 ?>
     <div class="container mail">
         <div id="card">

@@ -18,7 +18,7 @@
         catch(Exeption $e){}
         headCreate();
         echo "<body class='camBody' onresize='adaptSticker()' onkeydown='moveSticker(event)'>";
-        navbar($_SESSION);
+        navbar();
         if(isset($_SESSION['pseudo']))
                 youCanEdit($_SESSION,$PDO,$_SERVER['PHP_SELF']); 
 ?>

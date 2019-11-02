@@ -57,7 +57,7 @@
 
 <body onload='loginResposive()' onresize="loginResposive()">
         <?php
-            navbar($_SESSION);    
+            navbar();    
         ?>
         <div class="resend">
                  <p class="galleryLink question">not convinced yet ? <a id="send"

@@ -13,10 +13,11 @@
     }
 
     function    ft_verifie_mail($email,$PDO){
+        $emailFiltred = filter_var($email, FILTER_SANITIZE_EMAIL);
         if($PDO->verifyPDO('users','email',$email)){
             return "this email is already taken.";
         }
-        if(!filter_var($email,FILTER_VALIDATE_EMAIL)){
+        if(!filter_var($email, FILTER_VALIDATE_EMAIL) || $emailFiltred != $email){
             return "please choose a valide email.";
         }
         return NULL;

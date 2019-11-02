@@ -34,6 +34,12 @@ a:hover {
 }
 
 body {
+    max-width: 100% !important;
+    overflow-x: hidden !important;
+}
+
+body {
+    font-family: 'Roboto', sans-serif !important;
     color: #E1E1E1 !important;
     background-color: #1a1919 !important;
 }
@@ -258,6 +264,9 @@ hr {
 .mail {
     max-width: 400px;
 }
+.contain404{
+    max-width: 750px;
+}
 
 #card {
     position: absolute;
@@ -272,6 +281,39 @@ hr {
     box-shadow: 0 0 0.2rem rgba(0, 0, 0, 0.5);
 }
 
+#field404 {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 750px;
+    height: 500px;
+    text-align: center;
+    border-radius: 5px;
+    background-color: #202020;
+    box-shadow: 0 0 0.2rem rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+}
+#field404 .message404{
+    color: #E2E1E1;
+    font-size: 30px;
+    text-shadow: 0em 0.3em 0.2em rgba(0,0,0,0.25);
+}
+#field404 .submessage{
+    color: #757575;
+    font-size: 15px;
+    padding-bottom: 20px;
+}
+#field404 .backToHome{
+    color: #E2E1E1;
+    margin-top: 10px;
+    padding: 10px 25px;
+    background-color: #AA495C;
+    border-radius: 5px;
+}
 #card .field {
     padding-top: 60px;
 }
@@ -619,7 +661,7 @@ form .sticker-input {
 
 
 .choiceLog {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: Roboto;
     font-size: 15px;
     padding: 10px 0;
     text-align: center;
@@ -1133,6 +1175,32 @@ input:checked+.slider:before {
         margin-top: 20px;      
     }
 }
+
+@media (max-height:600px){
+    .mail,.contain404{
+        position: relative;
+    }
+    #card,#field404{
+        transform: translate(-50%, 0%);
+    }
+}
+@media (max-width:850px){
+    #field404{
+        padding: 0 !important;
+        border-radius: 0 !important;
+        width: 100%;
+    }
+}
+
+@media (max-height:700px){
+    .contain404{
+        position: relative;
+    }
+    #field404{
+        transform: translate(-50%, 0%);
+    }
+}
+
 @keyframes shake {
 
     10%,

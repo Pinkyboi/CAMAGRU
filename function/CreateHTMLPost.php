@@ -45,13 +45,17 @@
                 $head .= "<link rel='icon' type='image/png' href='/favicon.png' />";
                 $head .= "<link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css'";
                 $head .= "integrity='sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T'crossorigin='anonymous'>";
+                $head .= "<link href='https://fonts.googleapis.com/css?family=Roboto&display=swap' rel='stylesheet'>";
                 $head .= "<script src='templet.js'></script>";
                 $head .= "<title>CAMAGRU</title></head>";
                 echo $head;
         }
-        function navbar(){
+        function navbar($use=0){
                 $navbar ="<nav class='navbar navbar-dark'><div class='container'>";
-                if(isset($_SESSION['profile'])){
+                if($use == 1){
+                        $navbar .="<a class='navbar-brand' href='./viewIndex.php'><img src='/imgs/log-logo.svg' alt=''></a>";
+                }
+                else if(isset($_SESSION['profile'])){
                     $navbar .="<a class='navbar-brand' href='./viewGallery.php'><img src='/imgs/log-logo.svg' alt=''></a>";
                     $navbar .="<div style='display:inline-flex'class='intractionAccount'>";
                     $navbar .="<div class='navProfile' >";

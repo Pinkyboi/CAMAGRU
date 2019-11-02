@@ -82,7 +82,8 @@ function infiniteloading(e){
                     dead = true;
                     index = document.querySelectorAll('.post').length;
                     var spinner = document.querySelector('.spinner');
-                    spinner.style.display ='block';
+                    if(spinner)
+                        spinner.style.display ='block';
                     var statement = "/function/CreateHTMLPost.php?use=reload&index="+index;  
                     setTimeout(function(){resendQuery(statement,2);}, 2000);
                     setTimeout(function(){spinner.style.display ='none'}, 3000);

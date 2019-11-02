@@ -73,8 +73,8 @@
                                                                 <img id="miniLogo" src="/imgs/logo-mini.svg" alt="logo-camagru">
                                                                 <form class="registionForm" action="viewIndex.php" method="POST">
                                                                         <input autocomplete="off" class="<?php if(isset($errorRegistation['errpsdo'])) echo 'errorField'?>"name="userRegistration" type="text"
-                                                                                placeholder="username" value=<?php if(!isset($_SESSION['sent']) && isset($_POST['userRegistration'])) echo htmlentities($_POST['userRegistration'])?>><br>
-                                                                        <input autocomplete="off" class="<?php if(isset($errorRegistation['errmail'])) echo 'errorField'?>" type="email" name="emailRegistration" placeholder="email" value=<?php if(!isset($_SESSION['sent']) && isset($_POST['emailRegistration'])) echo htmlentities($_POST['emailRegistration'])?>><br>
+                                                                                placeholder="username" value="<?php if(!isset($_SESSION['sent']) && isset($_POST['userRegistration'])) echo htmlentities($_POST['userRegistration'])?>"><br>
+                                                                        <input autocomplete="off" class="<?php if(isset($errorRegistation['errmail'])) echo 'errorField'?>" type="email" name="emailRegistration" placeholder="email" value="<?php if(!isset($_SESSION['sent']) && isset($_POST['emailRegistration'])) echo htmlentities($_POST['emailRegistration'])?>"><br>
                                                                         <input autocomplete="off" class="<?php if(isset($errorRegistation['errpass'])) echo 'errorField'?>" type="password" name="passwordRegistration"
                                                                                 placeholder="password"><br>
                                                                         <input autocomplete="off" type="password" name="confirmPasswordRegistartion"
@@ -112,7 +112,7 @@
                                                         <img id="miniLogo" src="/imgs/logo-mini.svg" alt="logo-camagru">
                                                         <form class="loginForm" action="viewIndex.php" method="POST">
                                                                 <input autocomplete="off" class="<?php if(isset($errorLogin)) echo 'errorField'?>" type="text" name="accountName"
-                                                                                placeholder="email or username"value=<?php if(isset($_POST['accountName']))echo $_POST['accountName']?>><br>
+                                                                                placeholder="email or username"value="<?php if(isset($_POST['accountName']))echo $_POST['accountName']?>"><br>
                                                                 <input autocomplete="off" class="<?php if(isset($errorLogin)) echo 'errorField'?>" type="password" name="passwordLogin" id=""
                                                                                 placeholder="password"><br>
                                                                 <input autocomplete="off" type="submit" name="submitLogin" value="login">
@@ -147,7 +147,6 @@
                 var rightError = document.querySelector('#registerError');
                 if(typeof(leftError) != 'undefined' && leftError != null){
                         switchCase();
-                        console.log(leftError.innerHTML.length)
                 }
         }());
 </script>

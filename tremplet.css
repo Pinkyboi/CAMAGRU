@@ -399,7 +399,7 @@ hr {
     color: #A7A3A4;
     font-size: 14px;
     text-align: center;
-    width: 400px;
+    max-width: 400px;
     background-color: #202020;
     border-radius: 5px;
     transition: 0.6s;

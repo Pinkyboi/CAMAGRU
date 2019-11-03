@@ -24,7 +24,7 @@
             if(isset($_SESSION['pseudo'])){ 
                 $profileLink = profilePic($_SESSION,$PDO);
                 if($profileLink != '/gallery/profile.png')
-                    unlink($profileLink);
+                    unlink($_SERVER['DOCUMENT_ROOT'].$profileLink);
                 $ID = pseudoID($PDO);
                 delAllImage($PDO,$ID);
                 unset($_SESSION);

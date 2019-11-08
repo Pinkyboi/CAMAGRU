@@ -386,50 +386,59 @@ function displayErrorChange(jsonMessage){
     var father = document.querySelector('.errorContainer');
     if(jsonMessage['notification']){
         notifMsg = document.createElement('div');
-        notifMsg.className = 'error';
-        notifMsg.classList.add('valide');
-        notifMsg.style.opacity = 1;
-        notifMsg.innerHTML = jsonMessage['notification'];
-        setTimeout(function(){notifMsg.style.opacity = 0;}, 3000);
-        setTimeout(function(){notifMsg.style.display = 'none';},5000);
-        father.appendChild(notifMsg);
+        if(notifMsg){
+            notifMsg.className = 'error';
+            notifMsg.classList.add('valide');
+            notifMsg.style.opacity = 1;
+            notifMsg.innerHTML = jsonMessage['notification'];
+            setTimeout(function(){notifMsg.style.opacity = 0;}, 3000);
+            setTimeout(function(){notifMsg.style.display = 'none';},5000);
+            father.appendChild(notifMsg);            
+        }
     }
     if(jsonMessage['email']){
-            emailMsg = document.createElement('div');
+        emailMsg = document.createElement('div');
+        if(emailMsg){
             emailMsg.className = 'error';
             emailMsg.style.display = 'block';
-            if(jsonMessage['email'] != 'Your email have been updated'){
-                  emailMsg.innerHTML = jsonMessage['email'];
-                  document.querySelector('#changeEmail').classList.add('errorField');
-                  setTimeout(function(){emailMsg.style.display = 'none';},3000);
-            }
-                    
-            else{
-                    var newEmail = document.querySelector('#changeEmail');
-                    newEmail.placeholder = newEmail.value;
-                    if(newEmail.classList.contains('errorField'))
-                        newEmail.value = '';
-                    newEmail.classList.remove('errorField');
+            if(emailMsg){
+                if(jsonMessage['email'] != 'Your email have been updated'){
                     emailMsg.innerHTML = jsonMessage['email'];
-                    emailMsg.classList.add('valide');
-                    emailMsg.style.opacity = 1;
-                    setTimeout(function(){emailMsg.style.opacity = 0;}, 3000);
-                    setTimeout(function(){emailMsg.style.display = 'none';},5000);
-            }
-            father.appendChild(emailMsg)
+                    document.querySelector('#changeEmail').classList.add('errorField');
+                    setTimeout(function(){emailMsg.style.display = 'none';},3000);
+                }
+                        
+                else{
+                    var newEmail = document.querySelector('#changeEmail');
+                    if(newEmail){
+                        newEmail.placeholder = '';
+                        if(newEmail.classList.contains('errorField'))
+                            newEmail.value = '';
+                        newEmail.classList.remove('errorField');
+                        emailMsg.innerHTML = jsonMessage['email'];
+                        emailMsg.classList.add('valide');
+                        emailMsg.style.opacity = 1;
+                        setTimeout(function(){emailMsg.style.opacity = 0;}, 3000);
+                        setTimeout(function(){emailMsg.style.display = 'none';},5000);                    
+                    }
+                }
+                father.appendChild(emailMsg)                
+            }            
+        }
     }
     if(jsonMessage['pseudo']){
-            pseudoMsg = document.createElement('div');
+        pseudoMsg = document.createElement('div');
+        if(pseudoMsg){
             pseudoMsg.className = 'error';
             pseudoMsg.style.className = 'error';
             if(jsonMessage['pseudo'] != 'Your pseudo have been updated'){
-                    pseudoMsg.innerHTML = jsonMessage['pseudo'];
-                    document.querySelector('#changeUser').classList.add('errorField');
-                    setTimeout(function(){pseudoMsg.style.display = 'none' ;},3000);
-            }
-                    
+                pseudoMsg.innerHTML = jsonMessage['pseudo'];
+                document.querySelector('#changeUser').classList.add('errorField');
+                setTimeout(function(){pseudoMsg.style.display = 'none' ;},3000);
+            }   
             else{
-                    var newPseudo = document.querySelector('#changeUser');
+                var newPseudo = document.querySelector('#changeUser');
+                if(newPseudo && pseudoMsg){
                     newPseudo.placeholder = newPseudo.value;
                     newPseudo.value = '';
                     if(newPseudo.classList.contains('errorField'))
@@ -439,45 +448,49 @@ function displayErrorChange(jsonMessage){
                     pseudoMsg.style.opacity = 1;
                     setTimeout(function(){pseudoMsg.style.opacity = 0;
                     }, 3000);
-                    setTimeout(function(){pseudoMsg.style.display = 'none' ;},5000);
+                    setTimeout(function(){pseudoMsg.style.display = 'none' ;},5000);                    
+                }
             }
-            father.appendChild(pseudoMsg)
+            father.appendChild(pseudoMsg)                
+        }
     }
     if(jsonMessage['password']){
-            passwordMsg = document.createElement('div');
+        passwordMsg = document.createElement('div');
+        if(passwordMsg){
             passwordMsg.className = 'error'; 
             passwordMsg.style.display = 'block';
             var confirmPassword = document.querySelector('#confirmPassword');
             var changePassword = document.querySelector('#changePassword');
             if(jsonMessage['password'] != 'Your password have been updated'){
-                 passwordMsg.innerHTML = jsonMessage['password'];
-                 document.querySelector('#changePassword').classList.add('errorField');
-                 confirmPassword.value = '';
-                 setTimeout(function(){passwordMsg.style.display = 'none' ;},3000);
+                passwordMsg.innerHTML = jsonMessage['password'];
+                document.querySelector('#changePassword').classList.add('errorField');
+                confirmPassword.value = '';
+                setTimeout(function(){passwordMsg.style.display = 'none' ;},3000);
             }
                     
             else{
-                    if(changePassword.classList.contains('errorField'))
-                        changePassword.classList.remove('errorField');
-                    changePassword.value = '';
-                    confirmPassword.value = '';
-                    passwordMsg.innerHTML = jsonMessage['password'];
-                    passwordMsg.classList.add('valide');
-                    passwordMsg.style.opacity = 1;
-                    setTimeout(function(){passwordMsg.style.opacity = 0;
-                   }, 3000);
-                   setTimeout(function(){pseudo.Msgstyle.display = 'none';},5000);
-                   
+                if(changePassword.classList.contains('errorField'))
+                     changePassword.classList.remove('errorField');
+                changePassword.value = '';
+                confirmPassword.value = '';
+                passwordMsg.innerHTML = jsonMessage['password'];
+                passwordMsg.classList.add('valide');
+                passwordMsg.style.opacity = 1;
+                setTimeout(function(){passwordMsg.style.opacity = 0;}, 3000);
+                setTimeout(function(){pseudo.Msgstyle.display = 'none';},5000);  
             }
-            father.appendChild(passwordMsg);
+            father.appendChild(passwordMsg);                
+        }
     }
 }
 
 function saveThePic(e){
     var canvas = document.querySelector('#canvas');
-    var canvaUrl = canvas.toDataURL();
     var hiddenInput = document.querySelector('.encodedCanva');
-    hiddenInput.value = canvaUrl;
+    if(canvas){
+        var canvaUrl = canvas.toDataURL();
+        hiddenInput.value = canvaUrl;
+    }
 }
 
 function bindImages(e){
@@ -485,15 +498,17 @@ function bindImages(e){
     var stickers = document.getElementsByName('sticker');
     var stickerValue = 0;
     var imageEncoded = document.querySelector('.encodedCanva').value;
-    var i = -1;
-    while(stickers[++i]){
+    if(imageEncoded && stickers){
+        var i = -1;
+        while(stickers[++i]){
             if(stickers[i].checked){
-                    stickerValue = stickers[i].value;
-                    break ;
+                stickerValue = stickers[i].value;
+                break ;
             }
+        }
+        var statement = "/function/createImage.php?encodedCanva="+imageEncoded+"&sticker="+stickerValue;
+        resendQuery(statement,0);        
     }
-    var statement = "/function/createImage.php?encodedCanva="+imageEncoded+"&sticker="+stickerValue;
-    resendQuery(statement,0);
 }
 
 function delcomment(e){

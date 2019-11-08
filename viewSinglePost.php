@@ -2,11 +2,7 @@
     include('./function/CreateHTMLPost.php');
     include('./function/exitSession.php');
     try{
-        verifyLink($_SERVER['PHP_SELF']);
-        if(isset($_FILES['profile']['name'])){
-                uploadImage($_FILES,$_SESSION,$PDO,'profile');
-                $_SESSION['profile'] = profilePic($_SESSION,$PDO);
-        }              
+        verifyLink($_SERVER['PHP_SELF']);         
         if(isset($_GET['id']))
         {
                 $index = $_GET['id'];

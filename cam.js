@@ -7,7 +7,6 @@
                 thePic = document.querySelector('.thePic'),
                 takePic = document.querySelector('.takePic');
                 containUpload = document.querySelector('#containUpload');
-        var bodyCam = document.querySelector('body');
         width = parseInt(window.getComputedStyle(takePic).width, 10);
         height = width * 0.75;
         navigator.getMedia = (navigator.getUserMedia ||

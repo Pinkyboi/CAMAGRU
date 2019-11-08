@@ -135,7 +135,7 @@
         <div class="focus"></div>
         <footer class="footer">© 2019 CAMAGRU</footer>
 </body>
-        <script src="cam.js"></script>
+        <script src="/cam.js"></script>
         <script>
  
         </script>
